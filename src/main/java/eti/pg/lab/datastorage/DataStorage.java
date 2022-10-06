@@ -37,7 +37,7 @@ public class DataStorage
      * @return - container (can be empty) with planeType if it is present
      */
     public Optional<Plane> findPlane(String typeName){
-        return planeTypes.stream().findFirst().map(CloningUtility::clone);
+        return planeTypes.stream().filter(type -> type.getTypeName().equals(typeName)).findFirst().map(CloningUtility::clone);
     }
 
     /**
