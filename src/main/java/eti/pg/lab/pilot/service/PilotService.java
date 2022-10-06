@@ -1,0 +1,36 @@
+package eti.pg.lab.pilot.service;
+
+import eti.pg.lab.pilot.entity.Pilot;
+import eti.pg.lab.pilot.repository.PilotRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class PilotService {
+
+    private PilotRepository repository;
+
+    @Autowired
+    public PilotService(PilotRepository repository){
+        this.repository = repository;
+    }
+
+    public Optional<Pilot> find(int id){
+        return repository.find(id);
+    }
+
+    public List<Pilot> findAll(){
+        return repository.findAll();
+    }
+
+    public void create(Pilot pilot){
+        repository.create(pilot);
+    }
+
+    public void delete(int id){
+        repository.delete(id);
+    }
+}
