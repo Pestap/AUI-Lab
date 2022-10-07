@@ -121,7 +121,7 @@ public class CmdInterface {
         System.out.println("Give the name of a plane you want to delete:");
         String name = input.nextLine();
 
-        /** delete plane from all pilots
+        /* delete plane from all pilots
          */
 
         List<Pilot> pilots = pilotService.findAll();
@@ -129,12 +129,13 @@ public class CmdInterface {
         if(pilots != null) {
             for (int i = 0; i < pilots.size(); i++) {
                 List<Plane> planeList = pilots.get(i).getPlaneCertificationList();
+
                 if(planeList != null) {
                     for (int j = 0; j < planeList.size(); j++) {
-                        if (planeList.get(j).equals(name)) {
+                        if (planeList.get(j).getTypeName().equals(name)) {
                             planeList.remove(planeList.get(j));
-                            /** konieczna podmiana pilota
-                             */
+                            /* a new pilot is created based on the old one */
+
                             Pilot copy = CloningUtility.clone(pilots.get(i));
                             copy.setPlaneCertificationList(planeList);
 
@@ -181,7 +182,7 @@ public class CmdInterface {
                     .id(Integer.valueOf(pilotInformation[2]))
                     .dateOfBirth(LocalDate.of(Integer.valueOf(pilotInformation[3]), Integer.valueOf(pilotInformation[4]), Integer.valueOf(pilotInformation[5])))
                     .build();
-            try {
+            try { // in case pilot with that id already exists
                 pilotService.create(newPilot);
             }catch(IllegalArgumentException e){
                 System.out.println("Pilot already exists! Try again!");
@@ -192,25 +193,39 @@ public class CmdInterface {
     }
 
     private void addPlane(){
+        /*
+         * get the plane name: can contain space
+         */
         System.out.println("Provide the name of the plane:");
         String name = input.nextLine();
+
+        /*
+         * get the remaining information about an airplane
+         */
         System.out.println("Provide plane information in format:");
         System.out.println("capacity yearOfLaunch monthOLaunch dayOfLaunch");
 
-
+        /*
+        split string into tokens
+         */
         String planeInformationString = input.nextLine();
         String[] planeInformation = planeInformationString.split(" ");
 
+        /*
+         * Get plane desription (can contain whitespace)
+         */
+
         System.out.println("Provide a short descripiton of the plane:");
         String planeDescritpiton = input.nextLine();
-        try {
+
+        try { // in case data is invalid (ex. string instead of integer
             Plane newPlane = Plane.builder()
                             .typeName(name)
                             .capacity(Integer.valueOf(planeInformation[0]))
                             .launchDate(LocalDate.of(Integer.valueOf(planeInformation[1]), Integer.valueOf(planeInformation[2]), Integer.valueOf(planeInformation[3])))
                             .description(planeDescritpiton)
                             .build();
-            try {
+            try { //in case a plane with the same name already exists
                 planeService.create(newPlane);
             }catch(IllegalArgumentException ex){
                 System.out.println("Plane already exists!");
