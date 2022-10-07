@@ -1,8 +1,11 @@
 package eti.pg.lab.cmdrunner;
 
+import eti.pg.lab.pilot.entity.Pilot;
 import eti.pg.lab.pilot.service.PilotService;
+import eti.pg.lab.plane.entity.Plane;
 import eti.pg.lab.plane.service.PlaneService;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class CmdInterface {
@@ -46,7 +49,7 @@ public class CmdInterface {
                 System.out.println("Pilots:");
                 pilotService.findAll().forEach(System.out::println);
             }else if(answer == 3) {
-
+                addItem();
             }else if(answer == 4){
                 deleteItem();
             }else if(answer == 5){
@@ -73,15 +76,111 @@ public class CmdInterface {
             }
 
             if(answer == 1){
-                //delete from pilots
+                deletePilot();
+                break;
             }else if(answer == 2){
-                //delete from planes
-            }else{
+                deletePlane();
+                break;
+            }else {
                 System.out.println("Value to high!");
             }
-
-
         }
     }
+
+    private void deletePilot(){
+        int answer = 0;
+        while(true){
+            System.out.println("Give the id of pilot you want to delete:");
+            String inputString = input.nextLine();
+
+            try{
+                Integer.parseInt(inputString);
+                answer = Integer.valueOf(inputString);
+                break;
+            }catch (NumberFormatException ex) {
+                System.out.println("Given id is not valid!");
+                continue;
+            }
+        }
+        pilotService.delete(answer);
+    }
+
+    private void deletePlane(){
+        System.out.println("Give the name of a plane you want to delete:");
+        String name = input.nextLine();
+        planeService.delete(name);
+        System.out.println("DUPA");
+    }
+
+    private void addItem(){
+        while(true){
+            int answer = -1;
+            System.out.println("To which category would you like to add an element?");
+            System.out.println("1. Pilots");
+            System.out.println("2. Planes");
+            String inputString = input.nextLine();
+
+            try{
+                Integer.parseInt(inputString);
+                answer = Integer.valueOf(inputString);
+            }catch (NumberFormatException ex){
+                continue;
+            }
+
+            if(answer == 1){
+                addPilot();
+                break;
+            }else if(answer == 2){
+                addPlane();
+                break;
+            }else {
+                System.out.println("Value to high!");
+            }
+        }
+    }
+
+    private void addPilot(){
+        System.out.println("Provide pilot information in format:");
+        System.out.println("name surname id yearOfBirth monthOfBirth dayOfBirth");
+
+        String pilotInformationString = input.nextLine();
+        String[] pilotInformation = pilotInformationString.split(" ");
+        try {
+            Pilot newPilot = Pilot.builder()
+                    .name(pilotInformation[0])
+                    .surname(pilotInformation[1])
+                    .id(Integer.valueOf(pilotInformation[2]))
+                    .dateOfBirth(LocalDate.of(Integer.valueOf(pilotInformation[3]), Integer.valueOf(pilotInformation[4]), Integer.valueOf(pilotInformation[5])))
+                    .build();
+
+            pilotService.create(newPilot);
+        }catch(ArrayIndexOutOfBoundsException ex){
+            System.out.println("Not enough data provided! Try again!");
+        }
+    }
+
+    private void addPlane(){
+        System.out.println("Provide plane information in format:");
+        System.out.println("name capacity yearOfLaunch monthOLaunch dayOfLaunch");
+
+
+        String planeInformationString = input.nextLine();
+        String[] planeInformation = planeInformationString.split(" ");
+
+        System.out.println("Provide a short descripiton of the plane:");
+        String planeDescritpiton = input.nextLine();
+        try {
+            Plane newPlane = Plane.builder()
+                            .typeName(planeInformation[0])
+                            .capacity(Integer.valueOf(planeInformation[1]))
+                            .launchDate(LocalDate.of(Integer.valueOf(planeInformation[2]), Integer.valueOf(planeInformation[3]), Integer.valueOf(planeInformation[4])))
+                            .description(planeDescritpiton)
+                            .build();
+            planeService.create(newPlane);
+        }catch(ArrayIndexOutOfBoundsException ex){
+            System.out.println("Not enough data provided! Try again!");
+        }
+    }
+
 
 }

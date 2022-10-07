@@ -112,7 +112,7 @@ public class DataStorage
     public void deletePilot(int id) throws IllegalArgumentException{
         findPilot(id).ifPresentOrElse(
                 pilotFound -> pilots.remove(pilotFound),
-                () -> {throw new IllegalArgumentException("Pilot id: " + id + " does not exis!" );}
+                () -> {throw new IllegalArgumentException("Pilot id: " + id + " does not exist!" );}
         );
     }
 
