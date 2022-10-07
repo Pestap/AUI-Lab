@@ -27,7 +27,7 @@ public class DataStorage
      * @return - returns a deep copy of planeTypes set
      */
 
-    public List<Plane> findAllPlanes(){
+    public synchronized List<Plane> findAllPlanes(){
         return new ArrayList<>(planeTypes);
     }
 
@@ -36,7 +36,7 @@ public class DataStorage
      * @param typeName - name of the type of plane
      * @return - container (can be empty) with planeType if it is present
      */
-    public Optional<Plane> findPlane(String typeName){
+    public synchronized Optional<Plane> findPlane(String typeName){
         return planeTypes.stream().filter(type -> type.getTypeName().equals(typeName)).findFirst().map(CloningUtility::clone);
     }
 
@@ -46,7 +46,7 @@ public class DataStorage
      * @throws IllegalArgumentException - if the plane type already exists
      */
 
-    public void addPlane(Plane plane) throws IllegalArgumentException{
+    public synchronized void addPlane(Plane plane) throws IllegalArgumentException{
         findPlane(plane.getTypeName()).ifPresentOrElse(
                 typeNameFound -> {
                     throw new IllegalArgumentException("Plane type: " + plane.getTypeName()
@@ -60,7 +60,7 @@ public class DataStorage
      * @param typeName - the plane type we want deleted
      * @throws IllegalArgumentException - if the plane type does not exist in storage
      */
-    public void deletePlane(String typeName) throws IllegalArgumentException{
+    public synchronized void deletePlane(String typeName) throws IllegalArgumentException{
         findPlane(typeName).ifPresentOrElse(
                 planeFound -> planeTypes.remove(planeFound),
                 () ->{ throw new IllegalArgumentException("Plane type: " + typeName + " does not exist!");}
@@ -72,7 +72,7 @@ public class DataStorage
      * @return - returns a deep copy of pilots set
      */
 
-    public List<Pilot> findAllPilots(){
+    public synchronized List<Pilot> findAllPilots(){
         return new ArrayList<>(pilots);
     }
 
@@ -83,7 +83,7 @@ public class DataStorage
      * @return - pilot entity if it exists (or empty optional if it doesnt)
      */
 
-    public Optional<Pilot> findPilot(int id){
+    public synchronized Optional<Pilot> findPilot(int id){
         return pilots.stream()
                 .filter(pilot -> pilot.getId() == id)
                 .findFirst()
@@ -96,7 +96,7 @@ public class DataStorage
      * @throws IllegalArgumentException - if pilot already exists (based on id)
      */
 
-    public void addPilot(Pilot pilot) throws IllegalArgumentException{
+    public synchronized void addPilot(Pilot pilot) throws IllegalArgumentException{
         findPilot(pilot.getId()).ifPresentOrElse(
                 pilotFound -> {throw new IllegalArgumentException("Pilot with id: " + pilot.getId() + " already exists!");},
                 () -> pilots.add(CloningUtility.clone(pilot))

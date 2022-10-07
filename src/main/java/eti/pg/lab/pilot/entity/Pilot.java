@@ -49,7 +49,6 @@ public class Pilot implements Serializable {
     List of planes the pilot is certified to fly
      */
 
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Plane> planeCertificationList;
 

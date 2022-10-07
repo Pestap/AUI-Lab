@@ -62,7 +62,6 @@ public class Initializer {
                 .surname("Kowalski")
                 .id(2)
                 .dateOfBirth(LocalDate.of(1969, 7, 19))
-
                 .build();
 
         pilotService.create(p1);
