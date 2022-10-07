@@ -109,7 +109,6 @@ public class CmdInterface {
         System.out.println("Give the name of a plane you want to delete:");
         String name = input.nextLine();
         planeService.delete(name);
-        System.out.println("DUPA");
     }
 
     private void addItem(){
@@ -154,14 +153,16 @@ public class CmdInterface {
                     .build();
 
             pilotService.create(newPilot);
-        }catch(ArrayIndexOutOfBoundsException ex){
-            System.out.println("Not enough data provided! Try again!");
+        }catch(ArrayIndexOutOfBoundsException | NumberFormatException ex){
+            System.out.println("Invalid data! Try again!");
         }
     }
 
     private void addPlane(){
+        System.out.println("Provide the name of the plane:");
+        String name = input.nextLine();
         System.out.println("Provide plane information in format:");
-        System.out.println("name capacity yearOfLaunch monthOLaunch dayOfLaunch");
+        System.out.println("capacity yearOfLaunch monthOLaunch dayOfLaunch");
 
 
         String planeInformationString = input.nextLine();
@@ -171,14 +172,14 @@ public class CmdInterface {
         String planeDescritpiton = input.nextLine();
         try {
             Plane newPlane = Plane.builder()
-                            .typeName(planeInformation[0])
-                            .capacity(Integer.valueOf(planeInformation[1]))
-                            .launchDate(LocalDate.of(Integer.valueOf(planeInformation[2]), Integer.valueOf(planeInformation[3]), Integer.valueOf(planeInformation[4])))
+                            .typeName(name)
+                            .capacity(Integer.valueOf(planeInformation[0]))
+                            .launchDate(LocalDate.of(Integer.valueOf(planeInformation[1]), Integer.valueOf(planeInformation[2]), Integer.valueOf(planeInformation[3])))
                             .description(planeDescritpiton)
                             .build();
             planeService.create(newPlane);
-        }catch(ArrayIndexOutOfBoundsException ex){
-            System.out.println("Not enough data provided! Try again!");
+        }catch(ArrayIndexOutOfBoundsException | NumberFormatException ex){
+            System.out.println("Invalid data! Try again!");
         }
     }
 
