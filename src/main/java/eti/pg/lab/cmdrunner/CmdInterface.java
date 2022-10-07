@@ -24,70 +24,78 @@ public class CmdInterface {
     }
 
     public void DisplayUI(){
+        /** initial UI state
+         *
+         */
+        System.out.println("CATEGORIES: List categories (pilots)");
+        System.out.println("ELEMENTS: List all elements (planes)");
+        System.out.println("ADD: Add an element");
+        System.out.println("DELETE: Delete an element");
+        System.out.println("HELP: List all commands");
+        System.out.println("QUIT: Quit application");
 
+        /** main UI loop
+         *
+         */
         while(!quit) {
-            System.out.println("CATEGORIES: List categories (pilots)");
-            System.out.println("ELEMENTS: List all elements (planes)");
-            System.out.println("ADD: Add an element");
-            System.out.println("DELETE: Delete an element");
-            System.out.println("HELP: List all commands");
-            System.out.println("QUI: Quit application");
-
+            /**
+             * get command
+             */
             String inputString = input.nextLine();
-            int answer = 0;
-            try{
-                Integer.parseInt(inputString);
-                answer = Integer.valueOf(inputString);
-            }
-            catch (NumberFormatException ex){
-                System.out.println("Invalid input, please enter an integer");
-                continue;
-            }
 
-            if(answer == 1){
+
+            if(inputString.equals("CATEGORIES")){
+                /**List all categories
+                 *
+                 */
                 System.out.println("Pilots:");
                 pilotService.findAll().forEach(System.out::println);
                 System.out.println();
-            }else if(answer == 2) {
+            }else if(inputString.equals("ELEMENTS")) {
+                /**
+                 * list all elements
+                 */
                 System.out.println("Planes:");
                 planeService.findAll().forEach(System.out::println);
                 System.out.println();
 
-            }else if(answer == 3) {
+            }else if(inputString.equals("ADD")) {
                 addItem();
-            }else if(answer == 4){
+            }else if(inputString.equals("DELETE")){
                 deleteItem();
-            }else if(answer == 5){
+            }else if(inputString.equals("HELP")) {
+                System.out.println("CATEGORIES: List categories (pilots)");
+                System.out.println("ELEMENTS: List all elements (planes)");
+                System.out.println("ADD: Add an element");
+                System.out.println("DELETE: Delete an element");
+                System.out.println("HELP: List all commands");
+                System.out.println("QUIT: Quit application");
+            }else if(inputString.equals("QUIT")){
                 this.quit = true;
             }else{
-                System.out.println("Value to high!");
+                /** invalid command handling
+                 *
+                 */
+                System.out.println("Command not found. Type HELP to list avaliable commands.");
             }
         }
     }
 
     private void deleteItem(){
         while(true){
-            int answer = -1;
-            System.out.println("From wich category would you like to delete?");
-            System.out.println("1. Pilots");
-            System.out.println("2. Planes");
+            System.out.println("From which type of entity would you like to delete would you like to delete?");
+            System.out.println("PILOT");
+            System.out.println("PLANE");
             String inputString = input.nextLine();
 
-            try{
-                Integer.parseInt(inputString);
-                answer = Integer.valueOf(inputString);
-            }catch (NumberFormatException ex){
-                continue;
-            }
-
-            if(answer == 1){
+            if(inputString.equals("PILOT")){
                 deletePilot();
                 break;
-            }else if(answer == 2){
+            }else if(inputString.equals("PLANE")){
                 deletePlane();
                 break;
             }else {
-                System.out.println("Value to high!");
+                System.out.println("Unknown entity type!");
             }
         }
     }
@@ -104,7 +112,6 @@ public class CmdInterface {
                 break;
             }catch (NumberFormatException ex) {
                 System.out.println("Given id is not valid!");
-                continue;
             }
         }
         pilotService.delete(answer);
@@ -116,7 +123,6 @@ public class CmdInterface {
 
         /** delete plane from all pilots
          */
-        System.out.println("TU JESZCZE DZIALAM");
 
         List<Pilot> pilots = pilotService.findAll();
 
@@ -145,27 +151,19 @@ public class CmdInterface {
 
     private void addItem(){
         while(true){
-            int answer = -1;
-            System.out.println("To which category would you like to add an element?");
-            System.out.println("1. Pilots");
-            System.out.println("2. Planes");
+            System.out.println("What type of entity would you like to add?");
+            System.out.println("PILOT");
+            System.out.println("PLANE");
             String inputString = input.nextLine();
 
-            try{
-                Integer.parseInt(inputString);
-                answer = Integer.valueOf(inputString);
-            }catch (NumberFormatException ex){
-                continue;
-            }
-
-            if(answer == 1){
+            if(inputString.equals("PILOT")){
                 addPilot();
                 break;
-            }else if(answer == 2){
+            }else if(inputString.equals("PLANE")){
                 addPlane();
                 break;
             }else {
-                System.out.println("Value to high!");
+                System.out.println("Unknown entity type!");
             }
         }
     }
