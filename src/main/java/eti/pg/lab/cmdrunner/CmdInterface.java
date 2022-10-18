@@ -181,6 +181,7 @@ public class CmdInterface {
                     .surname(pilotInformation[1])
                     .id(Integer.valueOf(pilotInformation[2]))
                     .dateOfBirth(LocalDate.of(Integer.valueOf(pilotInformation[3]), Integer.valueOf(pilotInformation[4]), Integer.valueOf(pilotInformation[5])))
+                    .planeCertificationList(new ArrayList<>())
                     .build();
             try { // in case pilot with that id already exists
                 pilotService.create(newPilot);
@@ -227,6 +228,27 @@ public class CmdInterface {
                             .build();
             try { //in case a plane with the same name already exists
                 planeService.create(newPlane);
+
+                //choose category (pilot)
+                System.out.println("Choose the pilot for the plane:");
+
+                int counter =0;
+
+                List<Pilot> pilots = pilotService.findAll();
+                for(Pilot p : pilots ){
+                    System.out.println(counter + " - " + p);
+                    counter++;
+                }
+
+                 int pilotIndex = Integer.valueOf(input.nextLine());
+
+                Pilot toAdd = pilots.get(pilotIndex);
+
+                toAdd.getPlaneCertificationList().add(newPlane);
+
+                pilotService.delete(toAdd.getId());
+                pilotService.create(toAdd);
+
             }catch(IllegalArgumentException ex){
                 System.out.println("Plane already exists!");
             }

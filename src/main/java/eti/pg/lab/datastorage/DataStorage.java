@@ -52,6 +52,7 @@ public class DataStorage
                     throw new IllegalArgumentException("Plane type: " + plane.getTypeName()
                             + " already exists!");
                 }, ()->planeTypes.add(CloningUtility.clone(plane))
+                // choose pilot to add the plane to
         );
     }
 
