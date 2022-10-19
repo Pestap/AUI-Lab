@@ -1,13 +1,11 @@
 package eti.pg.lab.cmdrunner;
 
-import eti.pg.lab.CloningUtility;
 import eti.pg.lab.pilot.entity.Pilot;
 import eti.pg.lab.pilot.service.PilotService;
 import eti.pg.lab.license.entity.License;
 import eti.pg.lab.license.service.LicenseService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -165,7 +163,6 @@ public class CmdInterface {
                     .surname(pilotInformation[1])
                     .id(Integer.valueOf(pilotInformation[2]))
                     .dateOfBirth(LocalDate.of(Integer.valueOf(pilotInformation[3]), Integer.valueOf(pilotInformation[4]), Integer.valueOf(pilotInformation[5])))
-                    .licenseList(new ArrayList<>())
                     .build();
             // in case pilot with that id already exists
             pilotService.create(newPilot);
@@ -215,18 +212,13 @@ public class CmdInterface {
                 counter++;
             }
 
-             int pilotIndex = Integer.valueOf(input.nextLine());
+            int pilotIndex = Integer.valueOf(input.nextLine());
 
             Pilot toAdd = pilots.get(pilotIndex);
 
-            toAdd.getLicenseList().add(newLicense);
-
-            // add license to pilot
-            pilotService.delete(toAdd.getId());
-            pilotService.create(toAdd);
-
-            //add
+            newLicense.setPilot(toAdd);
             licenseService.create(newLicense);
+
         }catch(ArrayIndexOutOfBoundsException | IllegalArgumentException ex){
             System.out.println("Invalid data provided or license already exists! Try again!");
         }

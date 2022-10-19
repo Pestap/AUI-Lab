@@ -26,6 +26,8 @@ public class CommandLine implements org.springframework.boot.CommandLineRunner {
 
         CmdInterface UI = new CmdInterface(new Scanner(System.in), pilotService, licenseService);
         UI.DisplayUI();
+        //pilotService.findAll().forEach(System.out::println);
+
 
     }
 }

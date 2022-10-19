@@ -5,6 +5,7 @@ import eti.pg.lab.pilot.repository.PilotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,18 +20,19 @@ public class PilotService {
     }
 
     public Optional<Pilot> find(int id){
-        return repository.find(id);
+        return repository.findById(id);
     }
 
     public List<Pilot> findAll(){
         return repository.findAll();
     }
 
+    @Transactional
     public void create(Pilot pilot){
-        repository.create(pilot);
+        repository.save(pilot);
     }
-
+    @Transactional
     public void delete(int id){
-        repository.delete(id);
+        repository.deleteById(id);
     }
 }

@@ -4,6 +4,7 @@ import eti.pg.lab.license.entity.License;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -18,30 +19,36 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
-
+@ToString
+@Entity
+@Table(name="pilots")
 public class Pilot implements Serializable {
 
     /**
      * pilot's name
      */
+
+    @Column(name = "pilot_name")
     private String name;
 
     /**
      * pilot's surname
      */
+    @Column(name="pilot_surname")
     private String surname;
 
 
     /**p
      * pilot's unique id
      */
-
+    @Id
+    @Column(unique = true)
     private int id;
 
     /**
     Pilot's date of birth
      */
-
+    @Column(name="date_of_birth")
     private LocalDate dateOfBirth;
 
     /**
@@ -49,17 +56,10 @@ public class Pilot implements Serializable {
      */
 
     @EqualsAndHashCode.Exclude
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pilot")
+    @ToString.Exclude
     private List<License> licenseList;
 
-    @Override
-    public String toString(){
-        String result = "";
-        result = "Pilot: " + surname +" " + name+ ", date ofr birth: " + dateOfBirth + ", id: " + id;
-        for(License l : licenseList){
-            result+="\n - " + l;
-        }
-        return result;
-    }
 
 
 }
