@@ -32,6 +32,10 @@ public class PilotService {
         repository.save(pilot);
     }
     @Transactional
+    public void update(Pilot pilot){
+        repository.save(pilot);
+    }
+    @Transactional
     public void delete(int id){
         repository.deleteById(id);
     }

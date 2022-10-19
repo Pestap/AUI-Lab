@@ -22,9 +22,8 @@ public class CmdInterface {
     }
 
     public void DisplayUI(){
-        /** initial UI state
-         *
-         */
+        //initial UI state
+
         System.out.println("CATEGORIES: List categories (pilots)");
         System.out.println("ELEMENTS: List all elements (license)");
         System.out.println("ADD: Add an element");
@@ -32,20 +31,15 @@ public class CmdInterface {
         System.out.println("HELP: List all commands");
         System.out.println("QUIT: Quit application");
 
-        /** main UI loop
-         *
-         */
+        // main UI loop
+
         while(!quit) {
-            /**
-             * get command
-             */
+            // get command - ignore case
             String inputString = input.nextLine().toUpperCase();
 
 
             if(inputString.equals("CATEGORIES")){
-                /**List all categories
-                 *
-                 */
+                // list all pilots
                 System.out.println("Pilots:");
                 pilotService.findAll().forEach(System.out::println);
                 System.out.println();
@@ -84,9 +78,9 @@ public class CmdInterface {
             System.out.println("From which type of entity would you like to delete would you like to delete?");
             System.out.println("PILOT");
             System.out.println("LICENSE");
-            String inputString = input.nextLine();
-            // ignore case
-            inputString = inputString.toUpperCase();
+            //get input - ignore case
+            String inputString = input.nextLine().toUpperCase();
+
             if(inputString.equals("PILOT")){
                 deletePilot();
                 break;
@@ -135,9 +129,9 @@ public class CmdInterface {
             System.out.println("What type of entity would you like to add?");
             System.out.println("PILOT");
             System.out.println("LICENSE");
-            String inputString = input.nextLine();
-            // ignore case
-            inputString = inputString.toUpperCase();
+            // get input - ignore case
+            String inputString = input.nextLine().toUpperCase();
+
 
             if(inputString.equals("PILOT")){
                 addPilot();
@@ -193,6 +187,10 @@ public class CmdInterface {
             System.out.println("Provide a short descripiton of the license:");
             String licenseDescription = input.nextLine();
 
+            /**
+             * Create new license from given data
+             */
+
             License newLicense = License.builder()
                             .licenseId(Integer.valueOf(licenseInformation[0]))
                             .privilegeLevel(licenseInformation[1])
@@ -216,6 +214,10 @@ public class CmdInterface {
 
             Pilot toAdd = pilots.get(pilotIndex);
 
+
+            /**
+             * add pilot and create the entity
+             */
             newLicense.setPilot(toAdd);
             licenseService.create(newLicense);
 

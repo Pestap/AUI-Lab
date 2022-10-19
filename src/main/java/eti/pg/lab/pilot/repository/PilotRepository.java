@@ -10,7 +10,7 @@ import java.util.Optional;
 @org.springframework.stereotype.Repository
 public interface PilotRepository extends JpaRepository<Pilot, Integer> {
 
-    Optional<Pilot> findAllById(int id);
+    Optional<Pilot> findById(int id);
     List<Pilot> findAll();
 
 }

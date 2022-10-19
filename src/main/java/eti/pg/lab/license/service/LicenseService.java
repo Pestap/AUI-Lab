@@ -32,6 +32,10 @@ public class LicenseService {
         repository.save(license);
     }
     @Transactional
+    public void update(License license){
+        repository.save(license);
+    }
+    @Transactional
     public void delete(int id){
         repository.deleteById(id);
     }
