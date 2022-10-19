@@ -1,9 +1,10 @@
 package eti.pg.lab.pilot.entity;
 
-import eti.pg.lab.plane.entity.Plane;
+import eti.pg.lab.license.entity.License;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -17,32 +18,37 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@ToString
 @EqualsAndHashCode
-
+@ToString
+@Entity
+@Table(name="pilots")
 public class Pilot implements Serializable {
 
     /**
      * pilot's name
      */
+
+    @Column(name = "pilot_name")
     private String name;
 
     /**
      * pilot's surname
      */
+    @Column(name="pilot_surname")
     private String surname;
 
 
     /**p
      * pilot's unique id
      */
-
+    @Id
+    @Column(unique = true)
     private int id;
 
     /**
     Pilot's date of birth
      */
-
+    @Column(name="date_of_birth")
     private LocalDate dateOfBirth;
 
     /**
@@ -50,7 +56,10 @@ public class Pilot implements Serializable {
      */
 
     @EqualsAndHashCode.Exclude
-    private List<Plane> planeCertificationList;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pilot")
+    @ToString.Exclude
+    private List<License> licenseList;
+
 
 
 }
