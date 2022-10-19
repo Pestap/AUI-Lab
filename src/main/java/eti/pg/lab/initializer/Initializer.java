@@ -2,8 +2,8 @@ package eti.pg.lab.initializer;
 
 import eti.pg.lab.pilot.entity.Pilot;
 import eti.pg.lab.pilot.service.PilotService;
-import eti.pg.lab.plane.entity.Plane;
-import eti.pg.lab.plane.service.PlaneService;
+import eti.pg.lab.license.entity.License;
+import eti.pg.lab.license.service.LicenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,45 +16,59 @@ import java.util.List;
 public class Initializer {
 
     private final PilotService pilotService;
-    private final PlaneService planeService;
+    private final LicenseService licenseService;
 
 
     @Autowired
-    public Initializer(PilotService pilotService, PlaneService planeService){
+    public Initializer(PilotService pilotService, LicenseService licenseService){
         this.pilotService = pilotService;
-        this.planeService = planeService;
+        this.licenseService = licenseService;
     }
 
     @PostConstruct
     private synchronized void init(){
 
-        Plane a320 = Plane.builder()
-                .typeName("Airbus A320")
+        /*License a320 = License.builder()
+                .licenseId("Airbus A320")
                 .capacity(180)
-                .launchDate(LocalDate.of(1987,2,22))
+                .issueDate(LocalDate.of(1987,2,22))
                 .description("One of the most popular narrow-body airliners int the world. ")
                 .build();
 
-        Plane a380 = Plane.builder()
-                .typeName("Airbus A380")
+        License a380 = License.builder()
+                .licenseId("Airbus A380")
                 .capacity(560)
-                .launchDate(LocalDate.of(2005,4,27))
+                .issueDate(LocalDate.of(2005,4,27))
                 .description("The biggest airliner in the world. ")
                 .build();
+        */
 
-        planeService.create(a320);
-        planeService.create(a380);
+        License lic1 = License.builder()
+                .licenseId(1)
+                .privilegeLevel("sport")
+                .issueDate(LocalDate.of(2005, 4, 21))
+                .description("A sport license")
+                .build();
 
-        List<Plane> planeList = new ArrayList<>();
-        planeList.add(a380);
-        planeList.add(a320);
+        License lic2 = License.builder()
+                        .licenseId(2)
+                        .privilegeLevel("private")
+                        .issueDate(LocalDate.of(2008, 5,12))
+                        .description("May fly for pleasure or personal business. Private pilots cannot be paid, compensated to fly, or hired by any operator.")
+                        .build();
+        licenseService.create(lic1);
+        licenseService.create(lic2);
+
+        List<License> licenseList = new ArrayList<>();
+        licenseList.add(lic1);
+        licenseList.add(lic2);
 
         Pilot p1 = Pilot.builder()
                 .name("Piotr")
                 .surname("Pesta")
                 .id(1)
                 .dateOfBirth(LocalDate.of(2001,3,12))
-                .planeCertificationList(planeList)
+                .licenseList(licenseList)
                 .build();
 
         Pilot p2 = Pilot.builder()
@@ -62,7 +76,7 @@ public class Initializer {
                 .surname("Kowalski")
                 .id(2)
                 .dateOfBirth(LocalDate.of(1969, 7, 19))
-                .planeCertificationList(new ArrayList<>())
+                .licenseList(new ArrayList<>())
                 .build();
 
         pilotService.create(p1);

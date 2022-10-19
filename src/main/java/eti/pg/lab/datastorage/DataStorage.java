@@ -2,7 +2,7 @@ package eti.pg.lab.datastorage;
 
 import eti.pg.lab.CloningUtility;
 import eti.pg.lab.pilot.entity.Pilot;
-import eti.pg.lab.plane.entity.Plane;
+import eti.pg.lab.license.entity.License;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -14,7 +14,7 @@ public class DataStorage
      * Set of all unique plane types
      */
 
-    private Set<Plane> planeTypes = new HashSet<>();
+    private Set<License> licenses = new HashSet<>();
 
     /**
      * Set of all pilots
@@ -27,44 +27,44 @@ public class DataStorage
      * @return - returns a deep copy of planeTypes set
      */
 
-    public synchronized List<Plane> findAllPlanes(){
-        return new ArrayList<>(planeTypes);
+    public synchronized List<License> findAllLicenses(){
+        return new ArrayList<>(licenses);
     }
 
     /**
      *
-     * @param typeName - name of the type of plane
+     * @param id - license id
      * @return - container (can be empty) with planeType if it is present
      */
-    public synchronized Optional<Plane> findPlane(String typeName){
-        return planeTypes.stream().filter(type -> type.getTypeName().equals(typeName)).findFirst().map(CloningUtility::clone);
+    public synchronized Optional<License> findLicense(int id){
+        return licenses.stream().filter(type -> type.getLicenseId() == id).findFirst().map(CloningUtility::clone);
     }
 
     /**
      * Adds a new plane type to set
-     * @param plane - specification of the plane
+     * @param license - specification of the plane
      * @throws IllegalArgumentException - if the plane type already exists
      */
 
-    public synchronized void addPlane(Plane plane) throws IllegalArgumentException{
-        findPlane(plane.getTypeName()).ifPresentOrElse(
+    public synchronized void addLicense(License license) throws IllegalArgumentException{
+        findLicense(license.getLicenseId()).ifPresentOrElse(
                 typeNameFound -> {
-                    throw new IllegalArgumentException("Plane type: " + plane.getTypeName()
+                    throw new IllegalArgumentException("Plane type: " + license.getLicenseId()
                             + " already exists!");
-                }, ()->planeTypes.add(CloningUtility.clone(plane))
+                }, ()-> licenses.add(CloningUtility.clone(license))
                 // choose pilot to add the plane to
         );
     }
 
     /**
      * delets a plane type from collection
-     * @param typeName - the plane type we want deleted
+     * @param id - id of the license we want to delete
      * @throws IllegalArgumentException - if the plane type does not exist in storage
      */
-    public synchronized void deletePlane(String typeName) throws IllegalArgumentException{
-        findPlane(typeName).ifPresentOrElse(
-                planeFound -> planeTypes.remove(planeFound),
-                () ->{ throw new IllegalArgumentException("Plane type: " + typeName + " does not exist!");}
+    public synchronized void deleteLicense(int id) throws IllegalArgumentException{
+        findLicense(id).ifPresentOrElse(
+                planeFound -> licenses.remove(planeFound),
+                () ->{ throw new IllegalArgumentException("License: " + id + " does not exist!");}
         );
     }
 

@@ -1,6 +1,6 @@
 package eti.pg.lab.pilot.entity;
 
-import eti.pg.lab.plane.entity.Plane;
+import eti.pg.lab.license.entity.License;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -17,7 +17,6 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@ToString
 @EqualsAndHashCode
 
 public class Pilot implements Serializable {
@@ -50,7 +49,17 @@ public class Pilot implements Serializable {
      */
 
     @EqualsAndHashCode.Exclude
-    private List<Plane> planeCertificationList;
+    private List<License> licenseList;
+
+    @Override
+    public String toString(){
+        String result = "";
+        result = "Pilot: " + surname +" " + name+ ", date ofr birth: " + dateOfBirth + ", id: " + id;
+        for(License l : licenseList){
+            result+="\n - " + l;
+        }
+        return result;
+    }
 
 
 }

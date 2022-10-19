@@ -1,4 +1,4 @@
-package eti.pg.lab.plane.entity;
+package eti.pg.lab.license.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -18,25 +18,25 @@ import java.time.LocalDate;
  * Entity for plane type.
  */
 
-public class Plane implements Serializable {
+public class License implements Serializable {
     /**
-     * Plane type model designation
+     * License unique ID
      */
 
-    private String typeName;
+    private int licenseId;
 
 
     /**
-     * information about passenger+crew capacity of a plane type
+     * Privilege level - student, sport, itp
      */
 
-    private int capacity;
+    private String privilegeLevel;
 
     /**
-     * Date of first flight of this type of aircraft
+     * Date of license issue
      */
 
-    private LocalDate launchDate;
+    private LocalDate issueDate;
 
     /**
      * short description of the aircraft type
