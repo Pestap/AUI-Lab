@@ -63,7 +63,20 @@ public class DataStorage
      */
     public synchronized void deleteLicense(int id) throws IllegalArgumentException{
         findLicense(id).ifPresentOrElse(
-                planeFound -> licenses.remove(planeFound),
+                licenseFound -> {
+                    // delete license from pilots that have it
+                    for(Pilot p : pilots){
+                        for(Iterator<License> i = p.getLicenseList().iterator(); i.hasNext();){
+                            License lic = i.next();
+                            if (lic.getLicenseId() == id){
+                                i.remove();
+                            }
+                        }
+                    }
+                    // remove license AFTER removing it from pilots
+                    licenses.remove(licenseFound);
+
+                },
                 () ->{ throw new IllegalArgumentException("License: " + id + " does not exist!");}
         );
     }

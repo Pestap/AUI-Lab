@@ -124,31 +124,6 @@ public class CmdInterface {
             // get input
             String idString = input.nextLine();
             int id = Integer.valueOf(idString);
-            /* delete plane from all pilots
-             */
-
-            List<Pilot> pilots = pilotService.findAll();
-
-            if(pilots != null) {
-                for (int i = 0; i < pilots.size(); i++) {
-                    List<License> licenseList = pilots.get(i).getLicenseList();
-
-                    if(licenseList != null) {
-                        for (int j = 0; j < licenseList.size(); j++) {
-                            if (licenseList.get(j).getLicenseId() == id) {
-                                licenseList.remove(licenseList.get(j));
-                                /* a new pilot is created based on the old one */
-
-                                Pilot copy = CloningUtility.clone(pilots.get(i));
-                                copy.setLicenseList(licenseList);
-
-                                pilotService.delete(copy.getId());
-                                pilotService.create(copy);
-                            }
-                        }
-                    }
-                }
-            }
 
             licenseService.delete(id);
         }catch(NumberFormatException ex){
@@ -198,7 +173,6 @@ public class CmdInterface {
             System.out.println("Invalid data or pilot with a given id already exists! Try again!");
         }
     }
-
     private void addLicense(){
 
 
@@ -247,8 +221,11 @@ public class CmdInterface {
 
             toAdd.getLicenseList().add(newLicense);
 
+            // add license to pilot
             pilotService.delete(toAdd.getId());
             pilotService.create(toAdd);
+
+            //add
             licenseService.create(newLicense);
         }catch(ArrayIndexOutOfBoundsException | IllegalArgumentException ex){
             System.out.println("Invalid data provided or license already exists! Try again!");
