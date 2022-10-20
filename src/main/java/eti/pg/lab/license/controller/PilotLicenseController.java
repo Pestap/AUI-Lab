@@ -41,7 +41,8 @@ public class PilotLicenseController
     @GetMapping("{licenseId}")
     public ResponseEntity<GetLicenseResponse> getLicense(@PathVariable("pilotId") int pilotId,
                                                          @PathVariable("licenseId") int licenseId){
-        return licenseService.find(pilo)
-
+        return licenseService.find(pilotId, licenseId)
+                .map(value -> ResponseEntity.ok(GetLicenseResponse.entityToDtoMapper().apply(value)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

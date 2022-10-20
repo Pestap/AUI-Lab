@@ -1,4 +1,4 @@
-GET http://localhost:8080/api/pilots/2/licenses/1
+GET http://localhost:8080/api/pilots/1/licenses/1
 
 
 ###

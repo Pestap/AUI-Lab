@@ -50,6 +50,18 @@ public class LicenseController {
 
     }
 
+    @PostMapping
+    public ResponseEntity<Void> createLicenseByPost(@RequestBody CreateLicenseRequest request, UriComponentsBuilder builder){
+        License licenseToAdd = CreateLicenseRequest.dtoToEntityMapper(id -> pilotService.find(id).orElseThrow()).apply(request);
+        licenseToAdd = licenseService.create(licenseToAdd);
+
+        return ResponseEntity.created(builder
+                        .pathSegment("api", "licenses", "{id}")
+                        .buildAndExpand(licenseToAdd.getId()).toUri())
+                .build();
+
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<Void> updateLicense(@RequestBody UpdateLicenseRequest request, @PathVariable("id") int id){
         Optional<License> licenseToUpdate = licenseService.find(id);
