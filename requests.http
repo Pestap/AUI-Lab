@@ -1,0 +1,13 @@
+GET http://localhost:8080/api/pilots
+
+###
+
+PUT http://localhost:8080/api/pilots
+Content-Type: application/json
+
+{
+  "name": "zamina",
+  "surname": "testsh",
+  "id": 10,
+  "dateOfBirth": "2001-03-03"
+}

@@ -17,18 +17,14 @@ import java.util.function.Function;
 public class GetPilotsResponse {
 
     @Singular
-    private List<Pilot> pilots;
+    private List<String> pilots;
 
     public static Function<Collection<Pilot>, GetPilotsResponse> entityToDtoMapper(){
         return pilots -> {
                 GetPilotsResponseBuilder response = GetPilotsResponse.builder();
+
                 pilots.stream()
-                        .map(pilot ->Pilot.builder()
-                                .name(pilot.getName())
-                                .surname(pilot.getSurname())
-                                .id(pilot.getId())
-                                .dateOfBirth(pilot.getDateOfBirth())
-                                .build())
+                        .map(pilot -> pilot.getName() + " " + pilot.getSurname() + ", id: " + pilot.getId())
                         .forEach(response::pilot);
                 return response.build();
         };

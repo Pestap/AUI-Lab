@@ -36,7 +36,21 @@ public class PilotController {
                 .orElseGet(()->ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    /*@PostMapping
+    public ResponseEntity<Void> createPilot(@RequestBody CreatePilotRequest request, UriComponentsBuilder builder){
+        Pilot pilot  = CreatePilotRequest
+                .dtoToEntityMapper().apply(request);
+
+        pilot = pilotService.create(pilot);
+
+        return ResponseEntity
+                .created(builder
+                        .pathSegment("api", "pilots", "{id}")
+                        .buildAndExpand(pilot.getId()).toUri())
+                .build();
+    }*/
+
+    @PutMapping
     public ResponseEntity<Void> createPilot(@RequestBody CreatePilotRequest request, UriComponentsBuilder builder){
         Pilot pilot  = CreatePilotRequest
                 .dtoToEntityMapper().apply(request);
@@ -49,5 +63,4 @@ public class PilotController {
                         .buildAndExpand(pilot.getId()).toUri())
                 .build();
     }
-
 }
