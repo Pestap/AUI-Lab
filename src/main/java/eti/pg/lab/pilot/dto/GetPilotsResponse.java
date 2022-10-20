@@ -30,6 +30,7 @@ public class GetPilotsResponse {
         private String surname;
         private LocalDate dateOfBirth;
         private int numberOfLicenses;
+        private int id;
     }
     @Singular
     private List<PilotEntry> pilots;
@@ -42,6 +43,7 @@ public class GetPilotsResponse {
                         .map(pilot -> PilotEntry.builder()
                                 .name(pilot.getName())
                                 .surname(pilot.getSurname())
+                                .id(pilot.getId())
                                 .dateOfBirth(pilot.getDateOfBirth())
                                 .numberOfLicenses(pilot.getLicenseList().size())
                                 .build())

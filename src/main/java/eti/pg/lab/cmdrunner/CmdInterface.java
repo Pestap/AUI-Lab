@@ -192,7 +192,7 @@ public class CmdInterface {
              */
 
             License newLicense = License.builder()
-                            .licenseId(Integer.valueOf(licenseInformation[0]))
+                            .id(Integer.valueOf(licenseInformation[0]))
                             .privilegeLevel(licenseInformation[1])
                             .issueDate(LocalDate.of(Integer.valueOf(licenseInformation[2]), Integer.valueOf(licenseInformation[3]), Integer.valueOf(licenseInformation[4])))
                             .description(licenseDescription)

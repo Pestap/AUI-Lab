@@ -48,7 +48,7 @@ public class Initializer {
 
 
         License lic1 = License.builder()
-                .licenseId(1)
+                .id(1)
                 .privilegeLevel("sport")
                 .issueDate(LocalDate.of(2005, 4, 21))
                 .description("A sport license")
@@ -56,7 +56,7 @@ public class Initializer {
                 .build();
 
         License lic2 = License.builder()
-                .licenseId(2)
+                .id(2)
                 .privilegeLevel("private")
                 .issueDate(LocalDate.of(2008, 5,12))
                 .description("May fly for pleasure or personal business. Private pilots cannot be paid, compensated to fly, or hired by any operator.")

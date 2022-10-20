@@ -4,12 +4,15 @@ import eti.pg.lab.license.service.LicenseService;
 import eti.pg.lab.pilot.dto.CreatePilotRequest;
 import eti.pg.lab.pilot.dto.GetPilotResponse;
 import eti.pg.lab.pilot.dto.GetPilotsResponse;
+import eti.pg.lab.pilot.dto.UpdatePilotRequest;
 import eti.pg.lab.pilot.entity.Pilot;
 import eti.pg.lab.pilot.service.PilotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/pilots")
@@ -62,5 +65,28 @@ public class PilotController {
                         .pathSegment("api", "pilots", "{id}")
                         .buildAndExpand(pilot.getId()).toUri())
                 .build();
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Void> updatePilot(@RequestBody UpdatePilotRequest request, @PathVariable("id") int id){
+        Optional<Pilot> pilotToUpdate = pilotService.find(id);
+        if(pilotToUpdate.isPresent()){
+            UpdatePilotRequest.dtoToEntityUpdater().apply(pilotToUpdate.get(), request);
+            pilotService.update(pilotToUpdate.get());
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deletePilot(@PathVariable("id") int id){
+        Optional<Pilot> pilotToDelete = pilotService.find(id);
+        if(pilotToDelete.isPresent()){
+            pilotService.delete(id);
+            return ResponseEntity.accepted().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

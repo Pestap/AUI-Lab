@@ -1,4 +1,15 @@
-GET http://localhost:8080/api/pilots
+GET http://localhost:8080/api/pilots/2/licenses/1
+
+
+###
+PUT http://localhost:8080/api/pilots/2
+Content-Type: application/json
+
+{
+  "name" : "Jan",
+  "surname" : "Pesta",
+  "dateOfBirth" : "1942-12-07"
+}
 
 ###
 
@@ -11,3 +22,25 @@ Content-Type: application/json
   "id": 10,
   "dateOfBirth": "2001-03-03"
 }
+
+###
+
+DELETE http://localhost:8080/api/pilots/1
+
+
+###
+
+PUT http://localhost:8080/api/licenses
+Content-Type: application/json
+
+{
+  "id" : 3,
+  "privilegeLevel" : "sport",
+  "issueDate" : "2022-10-20",
+  "description" : "a short desc",
+  "pilotId" : 2
+}
+
+###
+
+GET http://localhost:8080/api/licenses/1
