@@ -1,4 +1,4 @@
-GET http://localhost:8080/api/pilots/1/licenses/1
+GET http://localhost:8080/api/licenses
 
 
 ###
@@ -44,3 +44,15 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/api/licenses/1
+
+###
+
+PUT http://localhost:8080/api/pilots/2/licenses
+Content-Type: application/json
+
+{
+  "id": 34,
+  "privilegeLevel" : "commercial",
+  "issueDate" : "2022-10-20",
+  "description" : "A commercial license"
+}
