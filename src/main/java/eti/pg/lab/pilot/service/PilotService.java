@@ -23,7 +23,6 @@ public class PilotService {
     public Optional<Pilot> find(int id){
         return repository.findById(id);
     }
-
     public List<Pilot> findAll(){
         return repository.findAll();
     }

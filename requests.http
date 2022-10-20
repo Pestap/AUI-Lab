@@ -1,49 +1,67 @@
-GET http://localhost:8080/api/licenses
+### Pilots GET all
+GET http://localhost:8080/api/pilots
 
+### Pilots GET succesful
+GET http://localhost:8080/api/pilots/1
 
-###
-PUT http://localhost:8080/api/pilots/2
+### Pilots GET 404
+GET http://localhost:8080/api/pilots/999
+
+### Pilots POST/PUT (new entity)
+POST http://localhost:8080/api/pilots
 Content-Type: application/json
 
 {
+  "id": 45,
   "name" : "Jan",
-  "surname" : "Pesta",
-  "dateOfBirth" : "1942-12-07"
+  "surname" : "Nowak",
+  "dateOfBirth" : "1998-12-07"
 }
 
-###
-
-PUT http://localhost:8080/api/pilots
+### Pilots PUT (update existing)
+PUT http://localhost:8080/api/pilots/45
 Content-Type: application/json
 
 {
-  "name": "zamina",
-  "surname": "testsh",
-  "id": 10,
+  "name": "Jan",
+  "surname": "Kowalski",
   "dateOfBirth": "2001-03-03"
 }
 
-###
+### Pilots DELETE
+DELETE http://localhost:8080/api/pilots/45
 
-DELETE http://localhost:8080/api/pilots/1
 
+### Licenses GET all
+GET http://localhost:8080/api/licenses
 
-###
+### Licenses GET (existing)
+GET http://localhost:8080/api/licenses/1
 
-PUT http://localhost:8080/api/licenses
+### Licenses POST/PUT
+POST http://localhost:8080/api/licenses
 Content-Type: application/json
 
 {
   "id" : 3,
-  "privilegeLevel" : "sport",
+  "privilegeLevel" : "ATP",
   "issueDate" : "2022-10-20",
-  "description" : "a short desc",
+  "description" : "Airline Transport Pilot",
   "pilotId" : 2
 }
 
-###
+### Licenses PUT (update)
+PUT http://localhost:8080/api/licenses/3
+Content-Type: application/json
 
-GET http://localhost:8080/api/licenses/1
+{
+  "privilegeLevel" : "ATP",
+  "issueDate" : "2022-10-20",
+  "description" : "Airline Transport Pilot (modified)"
+}
+
+### Licences DELETE
+DELETE http://localhost:8080/api/licenses/3
 
 ###
 
@@ -56,3 +74,7 @@ Content-Type: application/json
   "issueDate" : "2022-10-20",
   "description" : "A commercial license"
 }
+
+###
+
+DELETE http://localhost:8080/api/pilots/2/licenses/34

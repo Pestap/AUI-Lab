@@ -78,6 +78,21 @@ public class PilotLicenseController
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteLicense(@PathVariable("pilotId") int pilotId)
+    @DeleteMapping("{licenseId}")
+    public ResponseEntity<Void> deleteLicense(@PathVariable("pilotId") int pilotId,
+                                              @PathVariable("licenseId") int licenseId){
+        Optional<Pilot> pilot = pilotService.find(pilotId);
+        if(pilot.isPresent()){
+            Optional<License> license = licenseService.find(pilotId, licenseId);
+            if(license.isPresent()){
+                licenseService.delete(license.get().getId());
+                return ResponseEntity.accepted().build();
+            }else{
+                return ResponseEntity.notFound().build();
+            }
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
