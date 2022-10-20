@@ -28,8 +28,8 @@ public class PilotService {
     }
 
     @Transactional
-    public void create(Pilot pilot){
-        repository.save(pilot);
+    public Pilot create(Pilot pilot){
+        return repository.save(pilot);
     }
     @Transactional
     public void update(Pilot pilot){
