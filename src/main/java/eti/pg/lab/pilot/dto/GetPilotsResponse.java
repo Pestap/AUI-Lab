@@ -24,7 +24,7 @@ public class GetPilotsResponse {
                 GetPilotsResponseBuilder response = GetPilotsResponse.builder();
 
                 pilots.stream()
-                        .map(pilot -> pilot.getName() + " " + pilot.getSurname() + ", id: " + pilot.getId())
+                        .map(pilot -> pilot.getName() + " " + pilot.getSurname() + ", id: " + pilot.getId()+", licenses: " + pilot.getLicenseList().size())
                         .forEach(response::pilot);
                 return response.build();
         };
