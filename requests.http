@@ -63,9 +63,14 @@ Content-Type: application/json
 ### Licences DELETE
 DELETE http://localhost:8080/api/licenses/3
 
-###
+### Combined GET all from pilot 1
+GET http://localhost:8080/api/pilots/1/licenses
 
-PUT http://localhost:8080/api/pilots/2/licenses
+### Combined GET
+GET http://localhost:8080/api/pilots/1/licenses/1
+
+### Combined POST/PUT (new entity)
+POST http://localhost:8080/api/pilots/1/licenses
 Content-Type: application/json
 
 {
@@ -75,6 +80,23 @@ Content-Type: application/json
   "description" : "A commercial license"
 }
 
-###
+### Combined PUT update
+PUT http://localhost:8080/api/pilots/1/licenses/34
+Content-Type: application/json
 
-DELETE http://localhost:8080/api/pilots/2/licenses/34
+{
+  "privilegeLevel" : "commercial",
+  "issueDate" : "2022-10-20",
+  "description" : "A commercial license with more text"
+}
+
+### Combined DELETE
+
+DELETE http://localhost:8080/api/pilots/1/licenses/34
+
+
+### Combined DELETE all licenses
+
+DELETE http://localhost:8080/api/pilots/1/licenses
+
+
