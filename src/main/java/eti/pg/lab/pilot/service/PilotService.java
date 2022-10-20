@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PilotService {
@@ -22,14 +23,13 @@ public class PilotService {
     public Optional<Pilot> find(int id){
         return repository.findById(id);
     }
-
     public List<Pilot> findAll(){
         return repository.findAll();
     }
 
     @Transactional
-    public void create(Pilot pilot){
-        repository.save(pilot);
+    public Pilot create(Pilot pilot){
+        return repository.save(pilot);
     }
     @Transactional
     public void update(Pilot pilot){

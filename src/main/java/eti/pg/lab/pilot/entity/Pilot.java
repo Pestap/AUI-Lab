@@ -7,7 +7,9 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Entity for pilot. Represents information about particular pilot
@@ -56,7 +58,7 @@ public class Pilot implements Serializable {
      */
 
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pilot")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pilot",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<License> licenseList;
 

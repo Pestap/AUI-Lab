@@ -2,6 +2,8 @@ package eti.pg.lab.license.service;
 
 import eti.pg.lab.license.entity.License;
 import eti.pg.lab.license.repository.LicenseRepository;
+import eti.pg.lab.pilot.entity.Pilot;
+import eti.pg.lab.pilot.repository.PilotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,31 +14,46 @@ import java.util.Optional;
 @Service
 public class LicenseService {
 
-    private LicenseRepository repository;
+    private LicenseRepository licenseRepository;
+    private PilotRepository pilotRepository;
 
     @Autowired
-    public LicenseService(LicenseRepository repository){
-        this.repository= repository;
+    public LicenseService(LicenseRepository licenseRepository, PilotRepository pilotRepository){
+        this.licenseRepository = licenseRepository;
+        this.pilotRepository = pilotRepository;
     }
 
     public Optional<License> find(int id){
-        return repository.findById(id);
+        return licenseRepository.findById(id);
+    }
+    public Optional<License> find(int pilotId, int id){
+        Optional<Pilot> pilot = pilotRepository.findById(pilotId);
+        if(pilot.isPresent()){
+            return licenseRepository.findByPilotAndId(pilot.get(), id);
+        }else{
+            return Optional.empty();
+        }
+
+    }
+    public List<License> findAll(){
+        return licenseRepository.findAll();
     }
 
-    public List<License> findAll(){
-        return repository.findAll();
+    public List<License> findAll(Pilot pilot){
+        return licenseRepository.findAllByPilot(pilot);
     }
 
     @Transactional
-    public void create(License license){
-        repository.save(license);
+    public License create(License license){
+        return licenseRepository.save(license);
     }
     @Transactional
     public void update(License license){
-        repository.save(license);
+        licenseRepository.save(license);
     }
     @Transactional
     public void delete(int id){
-        repository.deleteById(id);
+        licenseRepository.deleteById(id);
     }
+
 }

@@ -27,7 +27,7 @@ public class License implements Serializable {
      */
     @Id
     @Column(unique = true, name="license_id")
-    private int licenseId;
+    private int id;
 
 
     /**
