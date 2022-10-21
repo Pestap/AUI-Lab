@@ -26,10 +26,21 @@ public class LicenseController {
         this.pilotService = pilotService;
         this.licenseService = licenseService;
     }
+
+    /**
+     * Gets all licences
+     * @return OK response
+     */
     @GetMapping
     public ResponseEntity<GetLicensesResponse> getLicenses(){
         return ResponseEntity.ok(GetLicensesResponse.entityToDtoMapper().apply(licenseService.findAll()));
     }
+
+    /**
+     * Gets a license with provided ID
+     * @param id - id of the license we want to get
+     * @return - OK response or 404 not found (if license with a given id does not exist)
+     */
     @GetMapping("{id}")
     public ResponseEntity<GetLicenseResponse> getLicense(@PathVariable("id") int id){
         return licenseService.find(id)
@@ -38,6 +49,12 @@ public class LicenseController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Creating a new license - same as POST (we should not use POST)
+     * @param request - the HTTP request containing data for new license
+     * @param builder - URI builder
+     * @return - http response with location header
+     */
     @PutMapping
     public ResponseEntity<Void> createLicense(@RequestBody CreateLicenseRequest request, UriComponentsBuilder builder){
         License licenseToAdd = CreateLicenseRequest.dtoToEntityMapper(id -> pilotService.find(id).orElseThrow()).apply(request);
@@ -50,6 +67,9 @@ public class LicenseController {
 
     }
 
+    /**
+     * same as PUT mapping with no parameters
+     */
     @PostMapping
     public ResponseEntity<Void> createLicenseByPost(@RequestBody CreateLicenseRequest request, UriComponentsBuilder builder){
         License licenseToAdd = CreateLicenseRequest.dtoToEntityMapper(id -> pilotService.find(id).orElseThrow()).apply(request);
@@ -62,12 +82,18 @@ public class LicenseController {
 
     }
 
+    /**
+     * Updates a license with given id
+     * @param request - http request with dataa
+     * @param id - id of the license we want to update
+     * @return - 200 OK or 404 found if license does not exist
+     */
     @PutMapping("{id}")
     public ResponseEntity<Void> updateLicense(@RequestBody UpdateLicenseRequest request, @PathVariable("id") int id){
         Optional<License> licenseToUpdate = licenseService.find(id);
 
         if(licenseToUpdate.isPresent()){
-            UpdateLicenseRequest.dtoToEntityUpdater().apply(licenseToUpdate.get(), request);
+            UpdateLicenseRequest.dtoToEntityUpdater(pilotId -> pilotService.find(pilotId).get()).apply(licenseToUpdate.get(), request);
             licenseService.update(licenseToUpdate.get());
             return ResponseEntity.ok().build();
         }else{
@@ -75,6 +101,11 @@ public class LicenseController {
         }
     }
 
+    /**
+     * Deletes license with a given id
+     * @param id - id of the license we want to delete
+     * @return = 202 or 404 not found if license does not exist
+     */
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteLicense(@PathVariable("id") int id){
         Optional<License> licenseToDelete = licenseService.find(id);

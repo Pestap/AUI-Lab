@@ -32,6 +32,11 @@ public class PilotLicenseController
         this.licenseService = licenseService;
     }
 
+    /**
+     * Get all licenses belonging to specified pilot
+     * @param pilotId - id of the pilot, of who we want to get licenses
+     * @return - 200 ok or 404 not found if pilot not found
+     */
     @GetMapping
     public ResponseEntity<GetLicensesResponse> getLicenses(@PathVariable("pilotId") int pilotId){
         Optional<Pilot> pilot = pilotService.find(pilotId);
@@ -41,6 +46,12 @@ public class PilotLicenseController
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Get given license of given pilot
+     * @param pilotId - id of the pilot
+     * @param licenseId - id of the license
+     * @return - 200 ok or 404 not found if pilot or license does not exits
+     */
     @GetMapping("{licenseId}")
     public ResponseEntity<GetLicenseResponse> getLicense(@PathVariable("pilotId") int pilotId,
                                                          @PathVariable("licenseId") int licenseId){
@@ -48,15 +59,25 @@ public class PilotLicenseController
                 .map(value -> ResponseEntity.ok(GetLicenseResponse.entityToDtoMapper().apply(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    /**
+     * Creating new license same as PostMpaping
+     * @param pilotId - id of the pilot we want to give new license
+     * @param request - request with data for new license
+     * @param builder - URI builder for http response
+     * @return 404 not found if pilot with given id does not exist, or created if license
+     * was created successfuly
+     */
     @PutMapping
     public ResponseEntity<Void> createLicense(@PathVariable("pilotId") int pilotId,
                                               @RequestBody CreateLicenseRequest request,
                                               UriComponentsBuilder builder){
-        request.setPilotId(pilotId);
+        //request.setPilotId(pilotId);
         Optional<Pilot> pilot = pilotService.find(pilotId);
         if(pilot.isPresent()){
             License licenseToAdd = CreateLicenseRequest
-                    .dtoToEntityMapper(id -> pilotService.find(id).orElseThrow())
+                    // lambda always returns pilot with Id from @PathVariable
+                    .dtoToEntityMapper(id -> pilotService.find(pilotId).orElseThrow())
                     .apply(request);
             licenseToAdd = licenseService.create(licenseToAdd);
             return ResponseEntity.created(builder.pathSegment("api", "pilots", "{pilotId}", "licenses", "{licenseId}")
@@ -66,15 +87,24 @@ public class PilotLicenseController
         }
     }
 
+
+    /**
+     * Same as PutMapping without additinal valuse
+     * @param pilotId - see PutMapping - createLicense
+     * @param request - see PutMapping - createLicense
+     * @param builder - see PutMapping - createLicense
+     * @return - see PutMapping - createLicense
+     */
     @PostMapping
     public ResponseEntity<Void> createLicensePOST(@PathVariable("pilotId") int pilotId,
                                               @RequestBody CreateLicenseRequest request,
                                               UriComponentsBuilder builder){
-        request.setPilotId(pilotId);
+        //request.setPilotId(pilotId);
         Optional<Pilot> pilot = pilotService.find(pilotId);
         if(pilot.isPresent()){
             License licenseToAdd = CreateLicenseRequest
-                    .dtoToEntityMapper(id -> pilotService.find(id).orElseThrow())
+                    // lambda always returns pilot with Id from @PathVariable
+                    .dtoToEntityMapper(id -> pilotService.find(pilotId).orElseThrow())
                     .apply(request);
             licenseToAdd = licenseService.create(licenseToAdd);
             return ResponseEntity.created(builder.pathSegment("api", "pilots", "{pilotId}", "licenses", "{licenseId}")
@@ -83,19 +113,33 @@ public class PilotLicenseController
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * Update existing license of given pilot
+     * @param pilotId - id of the pilot, who is the license owner
+     * @param request - http request body with new data for license
+     * @param licenseId - id of the license which we want to update
+     * @return - accepted or not found (if license does not exist)
+     */
     @PutMapping("{licenseId}")
     public ResponseEntity<Void> updateLicense(@PathVariable ("pilotId") int pilotId,
                                               @RequestBody UpdateLicenseRequest request,
                                               @PathVariable("licenseId") int licenseId){
         Optional<License> licenseToUpdate = licenseService.find(pilotId, licenseId);
         if(licenseToUpdate.isPresent()){
-            UpdateLicenseRequest.dtoToEntityUpdater().apply(licenseToUpdate.get(), request);
+            UpdateLicenseRequest.dtoToEntityUpdater(id -> pilotService.find(pilotId).get()).apply(licenseToUpdate.get(), request);
             licenseService.update(licenseToUpdate.get());
             return ResponseEntity.accepted().build();
         }else{
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * Delete all licenses of given pilot
+     * @param pilotId - id of the pilot
+     * @return - accepted or not found
+     */
     @DeleteMapping
     public ResponseEntity<Void> deleteAllLicenses(@PathVariable("pilotId") int pilotId){
         Optional<Pilot> pilot = pilotService.find(pilotId);
@@ -110,18 +154,20 @@ public class PilotLicenseController
         }
 
     }
+
+    /**
+     * Delete given license from given pilot
+     * @param pilotId - id of the pilot
+     * @param licenseId - id of the license
+     * @return - accepted or not found if license not found
+     */
     @DeleteMapping("{licenseId}")
     public ResponseEntity<Void> deleteLicense(@PathVariable("pilotId") int pilotId,
                                               @PathVariable("licenseId") int licenseId){
-        Optional<Pilot> pilot = pilotService.find(pilotId);
-        if(pilot.isPresent()){
-            Optional<License> license = licenseService.find(pilotId, licenseId);
-            if(license.isPresent()){
-                licenseService.delete(license.get().getId());
-                return ResponseEntity.accepted().build();
-            }else{
-                return ResponseEntity.notFound().build();
-            }
+        Optional<License> license = licenseService.find(pilotId, licenseId);
+        if(license.isPresent()){
+            licenseService.delete(license.get().getId());
+            return ResponseEntity.accepted().build();
         }else{
             return ResponseEntity.notFound().build();
         }
