@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ### Pilots DELETE
-DELETE http://localhost:8080/api/pilots/45
+DELETE http://localhost:8080/api/pilots/2
 
 
 ### Licenses GET all
@@ -58,7 +58,7 @@ Content-Type: application/json
   "privilegeLevel" : "ATP",
   "issueDate" : "2022-10-20",
   "description" : "Airline Transport Pilot (modified)",
-  "pilotId" : 1
+  "pilotId" : 2
 }
 
 ### Licences DELETE

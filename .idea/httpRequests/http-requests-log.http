@@ -1,0 +1,360 @@
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T164139.200.json
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T164135.200.json
+
+###
+
+DELETE http://localhost:8080/api/pilots/2
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T164118.200.json
+
+###
+
+PUT http://localhost:8080/api/licenses/3
+Content-Type: application/json
+
+{
+  "privilegeLevel" : "ATP",
+  "issueDate" : "2022-10-20",
+  "description" : "Airline Transport Pilot (modified)",
+  "pilotId" : 2
+}
+
+###
+
+PUT http://localhost:8080/api/licenses/3
+Content-Type: application/json
+
+{
+  "privilegeLevel" : "ATP",
+  "issueDate" : "2022-10-20",
+  "description" : "Airline Transport Pilot (modified)",
+  "pilotId" : 1
+}
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T164100.200.json
+
+###
+
+POST http://localhost:8080/api/licenses
+Content-Type: application/json
+
+{
+  "id" : 3,
+  "privilegeLevel" : "ATP",
+  "issueDate" : "2022-10-20",
+  "description" : "Airline Transport Pilot",
+  "pilotId" : 2
+}
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T164043.200.json
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T164017.200.json
+
+###
+
+PUT http://localhost:8080/api/pilots/45
+Content-Type: application/json
+
+{
+  "name": "Jan",
+  "surname": "Kowalski",
+  "dateOfBirth": "2001-03-03"
+}
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T164006.200.json
+
+###
+
+POST http://localhost:8080/api/pilots
+Content-Type: application/json
+
+{
+  "id": 45,
+  "name" : "Jan",
+  "surname" : "Nowak",
+  "dateOfBirth" : "1998-12-07"
+}
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T163942.200.json
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T163934.200.json
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T161731.200.json
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T161727.200.json
+
+###
+
+DELETE http://localhost:8080/api/pilots/1
+
+###
+
+GET http://localhost:8080/api/pilots/1/licenses
+
+<> 2022-10-21T152208.200.json
+
+###
+
+DELETE http://localhost:8080/api/pilots/1/licenses/34
+
+###
+
+GET http://localhost:8080/api/pilots/1/licenses
+
+<> 2022-10-21T152154.200.json
+
+###
+
+PUT http://localhost:8080/api/pilots/1/licenses/34
+Content-Type: application/json
+
+{
+  "privilegeLevel" : "commercial",
+  "issueDate" : "2022-10-20",
+  "description" : "A commercial license with more text"
+}
+
+###
+
+GET http://localhost:8080/api/pilots/1/licenses
+
+<> 2022-10-21T152140.200.json
+
+###
+
+PUT http://localhost:8080/api/pilots/1/licenses
+Content-Type: application/json
+
+{
+  "id": 34,
+  "privilegeLevel" : "commercial",
+  "issueDate" : "2022-10-20",
+  "description" : "A commercial license"
+}
+
+###
+
+GET http://localhost:8080/api/pilots/1/licenses/1
+
+<> 2022-10-21T152129.200.json
+
+###
+
+GET http://localhost:8080/api/pilots/1/licenses
+
+<> 2022-10-21T152120.200.json
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T152048.200.json
+
+###
+
+DELETE http://localhost:8080/api/licenses/3
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T152038.200.json
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T152028.200.json
+
+###
+
+POST http://localhost:8080/api/licenses
+Content-Type: application/json
+
+{
+  "id" : 3,
+  "privilegeLevel" : "ATP",
+  "issueDate" : "2022-10-20",
+  "description" : "Airline Transport Pilot",
+  "pilotId" : 2
+}
+
+###
+
+GET http://localhost:8080/api/licenses/1
+
+<> 2022-10-21T152021.200.json
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T152006.200.json
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T151944.200.json
+
+###
+
+POST http://localhost:8080/api/licenses
+Content-Type: application/json
+
+{
+  "id" : 3,
+  "privilegeLevel" : "ATP",
+  "issueDate" : "2022-10-20",
+  "description" : "Airline Transport Pilot",
+  "pilotId" : 2
+}
+
+###
+
+GET http://localhost:8080/api/licenses/1
+
+<> 2022-10-21T151932.200.json
+
+###
+
+GET http://localhost:8080/api/licenses
+
+<> 2022-10-21T151926.200.json
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T151915.200.json
+
+###
+
+DELETE http://localhost:8080/api/pilots/45
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T151833.200.json
+
+###
+
+PUT http://localhost:8080/api/pilots/45
+Content-Type: application/json
+
+{
+  "name": "Jan",
+  "surname": "Kowalski",
+  "dateOfBirth": "2001-03-03"
+}
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T151811.200.json
+
+###
+
+POST http://localhost:8080/api/pilots
+Content-Type: application/json
+
+{
+  "id": 45,
+  "name" : "Jan",
+  "surname" : "Nowak",
+  "dateOfBirth" : "1998-12-07"
+}
+
+###
+
+GET http://localhost:8080/api/pilots/999
+
+###
+
+GET http://localhost:8080/api/pilots/1
+
+<> 2022-10-21T151728.200.json
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T151721.200.json
+
+###
+
+GET http://localhost:8080/api/pilots
+
+<> 2022-10-21T151651.500.json
+
+###
+
+GET http://localhost:8080/api/pilots/1/licenses
+
+<> 2022-10-21T112926.200.json
+
+###
+
+PUT http://localhost:8080/api/pilots/1/licenses
+Content-Type: application/json
+
+{
+  "id": 34,
+  "privilegeLevel" : "commercial",
+  "issueDate" : "2022-10-20",
+  "description" : "A commercial license"
+}
+
+###
+
+GET http://localhost:8080/api/pilots/1/licenses
+
+<> 2022-10-21T112437.200.json
+
+###
+
