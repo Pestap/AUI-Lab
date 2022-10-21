@@ -72,11 +72,12 @@ public class PilotLicenseController
     public ResponseEntity<Void> createLicense(@PathVariable("pilotId") int pilotId,
                                               @RequestBody CreateLicenseRequest request,
                                               UriComponentsBuilder builder){
-        request.setPilotId(pilotId);
+        //request.setPilotId(pilotId);
         Optional<Pilot> pilot = pilotService.find(pilotId);
         if(pilot.isPresent()){
             License licenseToAdd = CreateLicenseRequest
-                    .dtoToEntityMapper(id -> pilotService.find(id).orElseThrow())
+                    // lambda always returns pilot with Id from @PathVariable
+                    .dtoToEntityMapper(id -> pilotService.find(pilotId).orElseThrow())
                     .apply(request);
             licenseToAdd = licenseService.create(licenseToAdd);
             return ResponseEntity.created(builder.pathSegment("api", "pilots", "{pilotId}", "licenses", "{licenseId}")
@@ -102,6 +103,7 @@ public class PilotLicenseController
         Optional<Pilot> pilot = pilotService.find(pilotId);
         if(pilot.isPresent()){
             License licenseToAdd = CreateLicenseRequest
+                    // lambda always returns pilot with Id from @PathVariable
                     .dtoToEntityMapper(id -> pilotService.find(pilotId).orElseThrow())
                     .apply(request);
             licenseToAdd = licenseService.create(licenseToAdd);

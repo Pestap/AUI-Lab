@@ -71,7 +71,7 @@ GET http://localhost:8080/api/pilots/1/licenses
 GET http://localhost:8080/api/pilots/1/licenses/1
 
 ### Combined POST/PUT (new entity)
-POST http://localhost:8080/api/pilots/1/licenses
+PUT http://localhost:8080/api/pilots/1/licenses
 Content-Type: application/json
 
 {
