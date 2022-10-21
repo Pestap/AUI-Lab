@@ -93,7 +93,7 @@ public class LicenseController {
         Optional<License> licenseToUpdate = licenseService.find(id);
 
         if(licenseToUpdate.isPresent()){
-            UpdateLicenseRequest.dtoToEntityUpdater().apply(licenseToUpdate.get(), request);
+            UpdateLicenseRequest.dtoToEntityUpdater(pilotId -> pilotService.find(pilotId).get()).apply(licenseToUpdate.get(), request);
             licenseService.update(licenseToUpdate.get());
             return ResponseEntity.ok().build();
         }else{

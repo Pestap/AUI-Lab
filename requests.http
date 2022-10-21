@@ -57,7 +57,8 @@ Content-Type: application/json
 {
   "privilegeLevel" : "ATP",
   "issueDate" : "2022-10-20",
-  "description" : "Airline Transport Pilot (modified)"
+  "description" : "Airline Transport Pilot (modified)",
+  "pilotId" : 1
 }
 
 ### Licences DELETE

@@ -98,11 +98,11 @@ public class PilotLicenseController
     public ResponseEntity<Void> createLicensePOST(@PathVariable("pilotId") int pilotId,
                                               @RequestBody CreateLicenseRequest request,
                                               UriComponentsBuilder builder){
-        request.setPilotId(pilotId);
+        //request.setPilotId(pilotId);
         Optional<Pilot> pilot = pilotService.find(pilotId);
         if(pilot.isPresent()){
             License licenseToAdd = CreateLicenseRequest
-                    .dtoToEntityMapper(id -> pilotService.find(id).orElseThrow())
+                    .dtoToEntityMapper(id -> pilotService.find(pilotId).orElseThrow())
                     .apply(request);
             licenseToAdd = licenseService.create(licenseToAdd);
             return ResponseEntity.created(builder.pathSegment("api", "pilots", "{pilotId}", "licenses", "{licenseId}")
@@ -125,7 +125,7 @@ public class PilotLicenseController
                                               @PathVariable("licenseId") int licenseId){
         Optional<License> licenseToUpdate = licenseService.find(pilotId, licenseId);
         if(licenseToUpdate.isPresent()){
-            UpdateLicenseRequest.dtoToEntityUpdater(id -> pilotService.find(id).get()).apply(licenseToUpdate.get(), request);
+            UpdateLicenseRequest.dtoToEntityUpdater(id -> pilotService.find(pilotId).get()).apply(licenseToUpdate.get(), request);
             licenseService.update(licenseToUpdate.get());
             return ResponseEntity.accepted().build();
         }else{
