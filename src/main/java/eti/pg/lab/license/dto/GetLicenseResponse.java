@@ -15,12 +15,19 @@ import java.util.function.Function;
 @ToString
 @EqualsAndHashCode
 public class GetLicenseResponse {
+    /**
+     * DTO for GET request for license
+     */
     private int id;
     private String privilegeLevel;
     private LocalDate issueDate;
     private String description;
     private int pilotId;
 
+    /**
+     *  Map license to http response
+     * @return - function that maps license to http repsonse
+     */
     public static Function<License, GetLicenseResponse> entityToDtoMapper(){
         return license -> GetLicenseResponse.builder()
                 .id(license.getId())

@@ -16,12 +16,20 @@ import java.util.function.Supplier;
 @ToString
 @EqualsAndHashCode
 public class CreateLicenseRequest {
+    /**
+     * DTO for creating license via http request
+     */
     private int id;
     private String privilegeLevel;
     private LocalDate issueDate;
     private String description;
     private int pilotId;
 
+    /**
+     * Maps dto to entity
+     * @param pilotFunction - get pilot from pilotId
+     * @return - function that transforms Request to Entity
+     */
     public static Function<CreateLicenseRequest, License> dtoToEntityMapper(
             Function<Integer, Pilot> pilotFunction
     ){

@@ -24,6 +24,9 @@ public class GetLicensesResponse {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @ToString
     @EqualsAndHashCode
+    /**
+     * Static class for license entry in GET response
+     */
     public static class LicenseEntry{
         private int id;
         private String privilegeLevel;
@@ -35,6 +38,10 @@ public class GetLicensesResponse {
     @Singular
     private List<LicenseEntry> licenses;
 
+    /**
+     * maps license collection to http response
+     * @return function that does the mapping
+     */
     public static Function<Collection<License>, GetLicensesResponse> entityToDtoMapper(){
         return licenses -> {
             GetLicensesResponseBuilder response = GetLicensesResponse.builder();

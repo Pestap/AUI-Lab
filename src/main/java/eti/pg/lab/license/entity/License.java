@@ -48,6 +48,9 @@ public class License implements Serializable {
 
     private String description;
 
+    /**
+     * FK to PILOTS table
+     */
     @ManyToOne
     @JoinColumn(name="pilot")
     private Pilot pilot;

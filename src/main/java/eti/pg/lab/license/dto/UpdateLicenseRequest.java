@@ -21,6 +21,11 @@ public class UpdateLicenseRequest {
     private String description;
     private int pilotId;
 
+    /**
+     * Maps license and update request into new licnse
+     * @param pilotFunction - function transforming integer(pilotId) to pilot entity
+     * @return - a function that does the mapping
+     */
     public static BiFunction<License, UpdateLicenseRequest, License> dtoToEntityUpdater(
             Function<Integer, Pilot> pilotFunction
     ){

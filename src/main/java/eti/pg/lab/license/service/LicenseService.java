@@ -26,6 +26,13 @@ public class LicenseService {
     public Optional<License> find(int id){
         return licenseRepository.findById(id);
     }
+
+    /**
+     * find license with pilot id and license id
+     * @param pilotId - pilotID
+     * @param id - license id
+     * @return - List of licenses
+     */
     public Optional<License> find(int pilotId, int id){
         Optional<Pilot> pilot = pilotRepository.findById(pilotId);
         if(pilot.isPresent()){
