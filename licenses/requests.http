@@ -1,0 +1,67 @@
+### Licenses GET all
+GET http://localhost:8082/api/licenses
+
+### Licenses GET (existing)
+GET http://localhost:8082/api/licenses/1
+
+### Licenses POST/PUT
+POST http://localhost:8082/api/licenses
+Content-Type: application/json
+
+{
+  "id" : 3,
+  "privilegeLevel" : "ATP",
+  "issueDate" : "2022-10-20",
+  "description" : "Airline Transport Pilot",
+  "pilotId" : 2
+}
+
+### Licenses PUT (update)
+PUT http://localhost:8082/api/licenses/3
+Content-Type: application/json
+
+{
+  "privilegeLevel" : "ATP",
+  "issueDate" : "2022-10-20",
+  "description" : "Airline Transport Pilot (modified)",
+  "pilotId" : 1
+}
+
+### Licences DELETE
+DELETE http://localhost:8082/api/licenses/3
+
+### Combined GET all from pilot 1
+GET http://localhost:8082/api/pilots/1/licenses
+
+### Combined GET
+GET http://localhost:8082/api/pilots/1/licenses/1
+
+### Combined POST/PUT (new entity)
+PUT http://localhost:8082/api/pilots/1/licenses
+Content-Type: application/json
+
+{
+  "id": 34,
+  "privilegeLevel" : "commercial",
+  "issueDate" : "2022-10-20",
+  "description" : "A commercial license"
+}
+
+### Combined PUT update
+PUT http://localhost:8082/api/pilots/1/licenses/34
+Content-Type: application/json
+
+{
+  "privilegeLevel" : "commercial",
+  "issueDate" : "2022-10-20",
+  "description" : "A commercial license with more text"
+}
+
+### Combined DELETE
+
+DELETE http://localhost:8082/api/pilots/1/licenses/34
+
+
+### Combined DELETE all licenses
+
+DELETE http://localhost:8082/api/pilots/1/licenses
