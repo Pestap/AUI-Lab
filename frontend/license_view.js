@@ -28,6 +28,10 @@ function displayLicense(response) {
     let link = document.getElementById('back')
     link.href = "pilot_view.html?pilotid=" + response.pilotId
 
+    let el0 = document.createElement('li')
+    el0.innerText = "ID: " + response.id
+    list.appendChild(el0)
+
     let el1 = document.createElement('li')
     el1.innerText = "Poziom uprawnień: " + response.privilegeLevel
     list.appendChild(el1)
@@ -35,6 +39,11 @@ function displayLicense(response) {
     let el2 = document.createElement('li')
     el2.innerText = "Data wydania: " + response.issueDate
     list.appendChild(el2)
+
+    
+    let el3 = document.createElement('li')
+    el3.innerText = "ID pilota: " + response.pilotId
+    list.appendChild(el3)
 
     information_div.appendChild(list)
 

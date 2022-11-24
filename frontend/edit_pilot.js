@@ -3,7 +3,7 @@ function getBackendUrl(){
 }
 
 window.addEventListener('load', () =>{
-    let form = document.getElementsByClassName('addPilotForm')[0]
+    let form = document.getElementsByClassName('addForm')[0]
     form.addEventListener('submit', event => editPilot(event))
 
     getPilot()

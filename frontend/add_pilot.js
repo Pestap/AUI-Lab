@@ -3,7 +3,7 @@ function getBackendUrl(){
 }
 
 window.addEventListener('load', () =>{
-    let form = document.getElementsByClassName('addPilotForm')[0]
+    let form = document.getElementsByClassName('addForm')[0]
     form.addEventListener('submit', event => createPilot(event))
 })
 
@@ -28,7 +28,7 @@ function createPilot(event){
     xhttp.setRequestHeader('Content-Type', 'application/json');
 
     xhttp.send(JSON.stringify(request_object));  
-      
+
     document.getElementById('id_form').value = ""
     document.getElementById('name_form').value = ""
     document.getElementById('surname_form').value = ""

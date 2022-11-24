@@ -45,6 +45,12 @@ function displayPilots(response) {
     let headerCell4 = document.createElement("th")
     headerCell4.innerText = "DATA URODZENIA"
     headerRow.appendChild(headerCell4)
+    let headerCell5 = document.createElement("th")
+    headerRow.appendChild(headerCell5)
+    let headerCell6 = document.createElement("th")
+    headerRow.appendChild(headerCell6)
+    let headerCell7 = document.createElement("th")
+    headerRow.appendChild(headerCell7)
 
     response.pilots.forEach(pilot => {
         createPilotRow(pilot)
@@ -71,15 +77,17 @@ function createPilotRow(pilot){
     cell_date.innerText = pilot.dateOfBirth
     row.appendChild(cell_date)
 
+    let cell_link = document.createElement('td')
     let details_link = document.createElement("a")
     details_link.href = "pilot_view.html?pilotid="+pilot.id
     details_link.innerText = "Szczegóły"
-    row.appendChild(details_link)
+    cell_link.appendChild(details_link)
+    row.appendChild(cell_link)
 
     let edit_cell = document.createElement("td")
     let edit_link = document.createElement("a")
     edit_link.innerText = "Edytuj"
-    edit_link.href = "pilot_edit.html?pilotid=" +pilot.id
+    edit_link.href = "edit_pilot.html?pilotid=" +pilot.id
     edit_cell.appendChild(edit_link)
     row.appendChild(edit_cell)
 

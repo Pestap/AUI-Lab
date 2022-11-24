@@ -19,6 +19,24 @@ a:hover{
     color:grey
 }
 
+table {
+    border-collapse: collapse; 
+    padding: 10px;
+    margin-top: 40px
+
+}
+
+tr { border: none; }
+td, th {
+  border-right: solid 3px #ffffff; 
+  border-left: solid 3px #ffffff;
+  text-align: center;
+  padding: 10px
+}
+th {
+    border-bottom: solid 3px #ffffff
+}
+
 .menu {
     display: flex;
     justify-content: space-around;
@@ -42,12 +60,12 @@ a:hover{
     padding: 40px
 }
 
-.addPilotForm {
+.addForm {
     display: flex;
     flex-direction: column;
 }
 
-.addPilotForm > * {
+.addForm > * {
     padding: 2px;
     margin: 2px
 }
