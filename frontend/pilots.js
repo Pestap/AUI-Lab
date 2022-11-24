@@ -12,13 +12,6 @@ window.addEventListener('load', () =>{
 
     //get and display pilots
     getAllPilots()
-
-
-
-    //add event listener to add button
-
-    let addButton = document.getElementsByClassName("listAllButton")[0]
-    addButton.addEventListener('click', () => displayPilotAddingForm())
 })
 
 

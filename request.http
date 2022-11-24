@@ -8,7 +8,7 @@ GET http://localhost:8080/api/pilots/1
 GET http://localhost:8080/api/pilots/999
 
 ### Pilots POST/PUT (new entity)
-POST http://localhost:8080/api/pilots
+PUT http://localhost:8080/api/pilots
 Content-Type: application/json
 
 {

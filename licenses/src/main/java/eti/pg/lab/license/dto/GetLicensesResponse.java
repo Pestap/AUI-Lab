@@ -32,7 +32,7 @@ public class GetLicensesResponse {
         private String privilegeLevel;
         private LocalDate issueDate;
         private String description;
-        private int pilot;
+        private int pilotId;
     }
 
     @Singular
@@ -51,7 +51,7 @@ public class GetLicensesResponse {
                             .privilegeLevel(license.getPrivilegeLevel())
                             .issueDate(license.getIssueDate())
                             .description(license.getDescription())
-                            .pilot(license.getPilot().getId())
+                            .pilotId(license.getPilot().getId())
                             .build()
                     ).forEach(response::license);
             return response.build();

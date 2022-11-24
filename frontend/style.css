@@ -31,27 +31,23 @@ a:hover{
 }
 
 .pilotInformation {
-     
+    padding: 10px
 }
 
+.licenseInformation {
+    padding: 10px
+}
 .pilotTable {
     width: 100%;
     padding: 40px
 }
 
-.pilotAddForm {
-    background-color: #595959;
-    padding: 2%;
-    border-radius: 5px;
-    margin-top: 20%;
-    position: fixed;
-}
-.addForm {
+.addPilotForm {
     display: flex;
     flex-direction: column;
 }
 
-.addForm > * {
-    padding: 5px;
-    margin: 5px
+.addPilotForm > * {
+    padding: 2px;
+    margin: 2px
 }
