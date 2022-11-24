@@ -30,7 +30,28 @@ a:hover{
     font-size: 24px;
 }
 
+.pilotInformation {
+     
+}
+
 .pilotTable {
     width: 100%;
     padding: 40px
+}
+
+.pilotAddForm {
+    background-color: #595959;
+    padding: 2%;
+    border-radius: 5px;
+    margin-top: 20%;
+    position: fixed;
+}
+.addForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.addForm > * {
+    padding: 5px;
+    margin: 5px
 }
