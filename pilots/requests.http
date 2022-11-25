@@ -1,0 +1,34 @@
+### Pilots GET all
+GET http://localhost:8081/api/pilots
+
+### Pilots GET succesful
+GET http://localhost:8081/api/pilots/1
+
+### Pilots GET 404
+GET http://localhost:8081/api/pilots/999
+
+### Pilots POST/PUT (new entity)
+POST http://localhost:8081/api/pilots
+Content-Type: application/json
+
+{
+  "id": 45,
+  "name" : "Jan",
+  "surname" : "Nowak",
+  "dateOfBirth" : "1998-12-07"
+}
+
+### Pilots PUT (update existing)
+PUT http://localhost:8081/api/pilots/45
+Content-Type: application/json
+
+{
+  "name": "Jan",
+  "surname": "Kowalski",
+  "dateOfBirth": "2001-03-03"
+}
+
+### Pilots DELETE
+DELETE http://localhost:8081/api/pilots/1
+
+

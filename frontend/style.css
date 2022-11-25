@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: #1c1c1c;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    color:grey
+}
+
+table {
+    border-collapse: collapse; 
+    padding: 10px;
+    margin-top: 40px
+
+}
+
+tr { border: none; }
+td, th {
+  border-right: solid 3px #ffffff; 
+  border-left: solid 3px #ffffff;
+  text-align: center;
+  padding: 10px
+}
+th {
+    border-bottom: solid 3px #ffffff
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 24px;
+}
+
+.menuHeader {
+    font-size: 24px;
+}
+
+.pilotInformation {
+    padding: 10px
+}
+
+.licenseInformation {
+    padding: 10px
+}
+.pilotTable {
+    width: 100%;
+    padding: 40px
+}
+
+.addForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.addForm > * {
+    padding: 2px;
+    margin: 2px
+}

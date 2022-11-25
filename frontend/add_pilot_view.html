@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AUI-lab</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	<script src="add_pilot.js"></script>
+    <h1><a href = "index.html" >Laboratorium numer 4 </a></h1>
+    
+    <div class = "menu">
+        <span class = "menuHeader">Podaj dane nowego pilota:</span>
+        <a href="pilots.html" class="menuHeader">powrót do listy pilotów</a>
+    </div>
+    <form class ="addForm">
+        <label for="id" >Id:</label>
+        <input type="number" name ="id" id ='id_form'required>
+        <label for="name" >Imię:</label>
+        <input type="text" name ="name" id='name_form' required>
+        <label for="surname" >Nazwisko:</label>
+        <input type="text" name ="surname" id='surname_form' required>
+        <label for="dateOfBirth">Data urodzenia:</label>
+        <input type="date" name ="dateOfBirth" max="2004-01-01" id='date_form' required>
+        <input type="submit" id="addPilotButton">
+    </form>
+
+
+
+  </body>
+</html>
