@@ -13,7 +13,7 @@ function createLicense(event){
     let pilotID = new URLSearchParams(window.location.search).get("pilotid")
 
     const xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", getBackendUrl() + '/api/pilots/' + pilotID + '/licenses', true);
+    xhttp.open("POST", getBackendUrl() + '/api/pilots/' + pilotID + '/licenses', true);
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 201) {
             alert("LICENSE CREATED")

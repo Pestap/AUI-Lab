@@ -4,7 +4,7 @@ function getBackendUrl(){
 
 window.addEventListener('load', () =>{
     getPilotFromURL()
-    getGetPilotLicenses()
+    getPilotLicenses()
 })
 
 function getPilotFromURL(){
@@ -47,7 +47,7 @@ function displayPilot(response) {
 
 }
 
-function getGetPilotLicenses(){
+function getPilotLicenses(){
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
@@ -131,7 +131,7 @@ function deleteLicense(license){
     const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 202) {
-                getGetPilotLicenses()
+                getPilotLicenses()
             }
         };
         xhttp.open("DELETE",getBackendUrl() + '/api/pilots/' + new URLSearchParams(window.location.search).get("pilotid") +"/licenses/"+license.id, true);

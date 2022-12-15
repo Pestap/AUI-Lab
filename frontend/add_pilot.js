@@ -9,7 +9,7 @@ window.addEventListener('load', () =>{
 
 function createPilot(event){
     const xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", getBackendUrl() + '/api/pilots/', true);
+    xhttp.open("POST", getBackendUrl() + '/api/pilots/', true);
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 201) {
             alert("PILOT CREATED")
