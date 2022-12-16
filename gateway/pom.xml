@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>eti.pg</groupId>
 	<artifactId>lab</artifactId>
-	<version>gateway</version>
+	<version>gateway-compose</version>
 	<name>lab</name>
 	<description>Laboratory</description>
 	<properties>

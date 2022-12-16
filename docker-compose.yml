@@ -1,0 +1,24 @@
+version: "3.4"
+services:
+  frontend: 
+    build: frontend
+    container_name: frontend
+
+  reverse-poxy:
+    build: ReverseProxy
+    container_name: ReverseProxy
+    ports:
+    - "8080:8080"
+    - "80:80"
+  backend:
+    build: gateway
+    container_name: backend
+
+  licenses:
+    build: licenses
+    container_name: licenses
+
+  pilots:
+    build: pilots
+    container_name: pilots
+    restart: on-failure

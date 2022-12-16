@@ -24,16 +24,12 @@ public class LabGatewayApplication {
 
 		return builder.routes()
 				.route("licenses", r -> r
-						.host("localhost:8080")
-						.and()
 						.path("/api/licenses/{id}", "/api/licenses", "/api/pilots/{id}/licenses", "/api/pilots/{id}/licenses/{license_id}")
-						.uri("http://localhost:8082")
+						.uri("http://licenses:8082")
 				)
 				.route("pilots", r->r
-						.host("localhost:8080")
-						.and()
 						.path("/api/pilots", "/api/pilots/{id}")
-						.uri("http://localhost:8081")
+						.uri("http://pilots:8081")
 				)
 				.build();
 

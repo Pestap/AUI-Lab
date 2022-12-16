@@ -1,5 +1,5 @@
 function getBackendUrl(){
-    return "http://localhost:8080"
+    return "http://gateway:8080"
 }
 
 window.addEventListener('load', () =>{
