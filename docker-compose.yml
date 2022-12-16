@@ -3,6 +3,9 @@ services:
   frontend: 
     build: frontend
     container_name: frontend
+    depends_on:
+      - backend
+
 
   reverse-poxy:
     build: ReverseProxy
@@ -10,6 +13,7 @@ services:
     ports:
     - "8080:8080"
     - "80:80"
+
   backend:
     build: gateway
     container_name: backend
@@ -17,8 +21,23 @@ services:
   licenses:
     build: licenses
     container_name: licenses
+    depends_on:
+      - backend
+    healthcheck:
+        test: curl --fail http://backend:8080/api/licenses || exit 1
+        interval: 5s
+        timeout: 3s
+        retries: 5
 
   pilots:
     build: pilots
     container_name: pilots
     restart: on-failure
+    depends_on:
+      licenses:
+        condition: service_healthy
+
+      
+networks:
+  default:
+    driver: bridge
