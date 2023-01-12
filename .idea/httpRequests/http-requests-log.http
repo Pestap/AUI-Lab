@@ -1,3 +1,91 @@
+PUT http://localhost:8080/api/files/3/file
+-----------------------------35236241653576449622212177429:
+Content-Disposition: form-data; name="file"; filename="testset.txt"
+Content-Type: Multipart/form-data
+
+asdasd
+-----------------------------35236241653576449622212177429--
+
+<> 2023-01-12T205409.500.json
+
+###
+
+PUT http://localhost:8080/api/files/3/file
+-----------------------------35236241653576449622212177429:
+Content-Disposition: form-data; name="file"; filename="testset.txt"
+Content-Type: text/plain
+
+asdasd
+-----------------------------35236241653576449622212177429--
+
+<> 2023-01-12T205319.415.json
+
+###
+
+POST http://localhost:8080/api/files
+Content-Type: application/json
+
+{
+"id": 45,
+"title" : "Jan",
+"description" : "Nowak",
+"author" : "1998-12-07"
+}
+
+###
+
+POST http://localhost:8080/api/files
+Content-Type: application/json
+
+{
+"id": 45,
+"title" : "Jan",
+"description" : "Nowak",
+"author" : "1998-12-07"
+}
+
+<> 2023-01-12T203133.404.json
+
+###
+
+POST http://localhost:8080/api/files
+Content-Type: application/json
+
+{
+"id": 45,
+"title" : "Jan",
+"description" : "Nowak",
+"author" : "1998-12-07"
+}
+
+<> 2023-01-12T202851.404.json
+
+###
+
+POST http://localhost:8080/api/files
+Content-Type: application/json
+
+{
+"id": 45,
+"title" : "Jan",
+"description" : "Nowak",
+"author" : "1998-12-07"
+}
+
+<> 2023-01-12T202832.404.json
+
+###
+
+GET http://localhost:8080/api/pilots/1
+
+<> 2023-01-12T201811.200.json
+
+###
+
+GET http://localhost:8080/api/pilots/999
+
+###
+
 GET http://localhost:8080/api/pilots
 
 <> 2022-10-21T164139.200.json
@@ -297,64 +385,6 @@ Content-Type: application/json
 GET http://localhost:8080/api/pilots
 
 <> 2022-10-21T151811.200.json
-
-###
-
-POST http://localhost:8080/api/pilots
-Content-Type: application/json
-
-{
-  "id": 45,
-  "name" : "Jan",
-  "surname" : "Nowak",
-  "dateOfBirth" : "1998-12-07"
-}
-
-###
-
-GET http://localhost:8080/api/pilots/999
-
-###
-
-GET http://localhost:8080/api/pilots/1
-
-<> 2022-10-21T151728.200.json
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T151721.200.json
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T151651.500.json
-
-###
-
-GET http://localhost:8080/api/pilots/1/licenses
-
-<> 2022-10-21T112926.200.json
-
-###
-
-PUT http://localhost:8080/api/pilots/1/licenses
-Content-Type: application/json
-
-{
-  "id": 34,
-  "privilegeLevel" : "commercial",
-  "issueDate" : "2022-10-20",
-  "description" : "A commercial license"
-}
-
-###
-
-GET http://localhost:8080/api/pilots/1/licenses
-
-<> 2022-10-21T112437.200.json
 
 ###
 

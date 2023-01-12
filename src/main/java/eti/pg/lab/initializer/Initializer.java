@@ -1,5 +1,6 @@
 package eti.pg.lab.initializer;
 
+import eti.pg.lab.file.service.FileDBService;
 import eti.pg.lab.pilot.entity.Pilot;
 import eti.pg.lab.pilot.service.PilotService;
 import eti.pg.lab.license.entity.License;
@@ -18,11 +19,14 @@ public class Initializer {
     private final PilotService pilotService;
     private final LicenseService licenseService;
 
+    private final FileDBService fileDBService;
+
 
     @Autowired
-    public Initializer(PilotService pilotService, LicenseService licenseService){
+    public Initializer(PilotService pilotService, LicenseService licenseService, FileDBService fileservice){
         this.pilotService = pilotService;
         this.licenseService = licenseService;
+        this.fileDBService = fileservice;
     }
 
     @PostConstruct

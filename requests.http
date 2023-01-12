@@ -17,6 +17,16 @@ Content-Type: application/json
   "surname" : "Nowak",
   "dateOfBirth" : "1998-12-07"
 }
+###
+POST http://localhost:8080/api/files
+Content-Type: application/json
+
+{
+"id": 45,
+"title" : "Jan",
+"description" : "Nowak",
+"author" : "1998-12-07"
+}
 
 ### Pilots PUT (update existing)
 PUT http://localhost:8080/api/pilots/45
