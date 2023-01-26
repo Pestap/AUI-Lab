@@ -111,3 +111,25 @@ DELETE http://localhost:8080/api/pilots/1/licenses/34
 DELETE http://localhost:8080/api/pilots/1/licenses
 
 
+### Multipartfile
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="index.html"
+
+< ./file_test/index.html
+
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+
+

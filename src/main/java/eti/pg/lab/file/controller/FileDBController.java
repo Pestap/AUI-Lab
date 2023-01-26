@@ -1,6 +1,8 @@
 package eti.pg.lab.file.controller;
 
+import com.google.common.io.Files;
 import eti.pg.lab.file.dto.CreateFileDBRequest;
+import eti.pg.lab.file.dto.GetFileResponse;
 import eti.pg.lab.file.entity.FileDB;
 import eti.pg.lab.file.repository.FileDBRepository;
 import eti.pg.lab.file.service.FileDBService;
@@ -10,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -23,40 +24,32 @@ public class FileDBController {
     public FileDBController(FileDBService service){
         this.service = service;
     }
-
-    //@GetMapping("{id}")
     @CrossOrigin
-    @PostMapping
-    public ResponseEntity<Void> createFile(@RequestBody CreateFileDBRequest request, UriComponentsBuilder builder){
-
-        FileDB fileDB = CreateFileDBRequest.dtoToEntityMapper().apply(request);
-        System.out.println("SIEMA " + fileDB.getTitle());
-        fileDB = service.save(fileDB);
-
-        return ResponseEntity
-                .created(builder
-                        .pathSegment("api", "files", "{id}")
-                        .buildAndExpand(fileDB.getId()).toUri())
-                .build();
-
+    @GetMapping(value = "{id}", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<GetFileResponse> getFile(@PathVariable("id") int id){
+        return null;
     }
 
     @CrossOrigin
-    @PutMapping(value="{id}/file",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> putFile(@PathVariable("id") int id,
-                                        @RequestParam("file") MultipartFile file) throws IOException{
-        System.out.println("PLIK");
-        Optional<FileDB> file_find = service.find(id);
-        if(file_find.isPresent()){
-            service.updateFile(file_find.get().getId(), file.getInputStream());
-            //save to directory
+    @PostMapping(value="{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> saveFile(@PathVariable(value="id") int id,
+                                        @RequestPart(value="file") MultipartFile file,
+                                        @RequestPart(value="data") CreateFileDBRequest json_data,
+                                         UriComponentsBuilder builder) throws IOException{
 
+        // create file object from dto
+        FileDB fileToSave = CreateFileDBRequest.dtoToEntityMapper().apply(json_data);
 
-            return ResponseEntity.accepted().build();
-        }else{
-            return ResponseEntity.notFound().build();
-        }
+        // get data from file itself and set according files
+        String fileName = file.getOriginalFilename();
+        fileToSave.setFilename(fileName);
+        fileToSave.setData(file.getBytes());
 
-
+        service.save(fileToSave);
+        return ResponseEntity
+                .created(builder
+                        .pathSegment("api", "files", "{id}")
+                        .buildAndExpand(fileToSave.getId()).toUri())
+                .build();
     }
 }

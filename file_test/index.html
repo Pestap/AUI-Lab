@@ -1,0 +1,79 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	<script>
+
+        var backend_url = 'http://localhost:8080';
+
+        window.addEventListener('load', () => {
+            const form = document.getElementById('uploadForm');
+            form.addEventListener('submit', event => uploadData(event));
+            
+
+            
+        });
+
+
+        function uploadData(event){
+            event.preventDefault();
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", backend_url  + '/api/files');
+
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 201) {
+                    uploadFile(event);
+                }
+            };
+
+            let request_object = 
+            {
+                'id' : document.getElementById('id_form').value,
+                'title' : document.getElementById('title_form').value,
+                'description' : document.getElementById('desc_form').value,
+                'author' : document.getElementById('auth_form').value
+            };
+
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            xhttp.send(JSON.stringify(request_object));
+        
+            
+
+
+
+
+
+        }
+
+        function uploadFile(event){
+            event.preventDefault();
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("PUT",backend_url  + '/api/files/' + document.getElementById('id_form').value + '/file', true);
+
+            let request = new FormData();
+            request.append("file", document.getElementById('file_form').files[0]);
+            xhttp.send(request);
+
+        }
+
+    </script>
+    <form id ="uploadForm">
+        <label for="id" >Id:</label>
+        <input type="number" name ="id" id ='id_form'required>
+        <label for="title" >Tytuł:</label>
+        <input type="text" name ="title" id='title_form' required>
+        <label for="desc" >Opis:</label>
+        <input type="text" name ="desc" id='desc_form' required>
+        <label for="author" >Autor:</label>
+        <input type="text" name ="author" id='auth_form' required>
+        <input type="file" id="file_form">
+        <input type="submit" id="addFileInfoButton">
+    </form>
+  </body>
+</html>

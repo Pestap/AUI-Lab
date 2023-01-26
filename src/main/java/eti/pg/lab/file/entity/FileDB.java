@@ -29,6 +29,9 @@ public class FileDB implements Serializable {
     @Column(name="author")
     private String author;
 
+    @Column(name="filename")
+    private String filename;
+
     @Lob
     private byte[] data;
 

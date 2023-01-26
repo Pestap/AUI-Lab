@@ -1,3 +1,1045 @@
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="index.html"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\index.html
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: application/json; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	<script>
+
+        var backend_url = 'http://localhost:8080';
+
+        window.addEventListener('load', () => {
+            const form = document.getElementById('uploadForm');
+            form.addEventListener('submit', event => uploadData(event));
+
+            const form2 = document.getElementById('fileForm');
+            form2.addEventListener('submit', event => uploadFile(event));
+
+        });
+
+
+        function uploadData(event){
+            event.preventDefault();
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", backend_url  + '/api/files');
+
+
+
+            let request_object =
+            {
+                'id' : document.getElementById('id_form').value,
+                'title' : document.getElementById('title_form').value,
+                'description' : document.getElementById('desc_form').value,
+                'author' : document.getElementById('auth_form').value
+            };
+
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            xhttp.send(JSON.stringify(request_object));
+
+
+
+
+
+
+
+        }
+
+        function uploadFile(event){
+            event.preventDefault();
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("PUT",backend_url  + '/api/files/' + document.getElementById('id_form').value + '/file', true);
+
+            let request = new FormData();
+            request.append("file", document.getElementById('file_form').files[0]);
+            console.log("siema");
+            xhttp.send(request);
+
+        }
+    </script>
+    <form id ="uploadForm">
+        <label for="id" >Id:</label>
+        <input type="number" name ="id" id ='id_form'required>
+        <label for="title" >TytuĹ‚:</label>
+        <input type="text" name ="title" id='title_form' required>
+        <label for="desc" >Opis:</label>
+        <input type="text" name ="desc" id='desc_form' required>
+        <label for="author" >Autor:</label>
+        <input type="text" name ="author" id='auth_form' required>
+
+        <input type="submit" id="addFileInfoButton">
+    </form>
+    <form id="fileForm">
+        <input type="file" id="file_form">
+        <input type="submit" id="addFileButton">
+    </form>
+  </body>
+</html>
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+
+<> 2023-01-26T153828.415.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: undefined; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	<script>
+
+        var backend_url = 'http://localhost:8080';
+
+        window.addEventListener('load', () => {
+            const form = document.getElementById('uploadForm');
+            form.addEventListener('submit', event => uploadData(event));
+
+            const form2 = document.getElementById('fileForm');
+            form2.addEventListener('submit', event => uploadFile(event));
+
+        });
+
+
+        function uploadData(event){
+            event.preventDefault();
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", backend_url  + '/api/files');
+
+
+
+            let request_object =
+            {
+                'id' : document.getElementById('id_form').value,
+                'title' : document.getElementById('title_form').value,
+                'description' : document.getElementById('desc_form').value,
+                'author' : document.getElementById('auth_form').value
+            };
+
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            xhttp.send(JSON.stringify(request_object));
+
+
+
+
+
+
+
+        }
+
+        function uploadFile(event){
+            event.preventDefault();
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("PUT",backend_url  + '/api/files/' + document.getElementById('id_form').value + '/file', true);
+
+            let request = new FormData();
+            request.append("file", document.getElementById('file_form').files[0]);
+            console.log("siema");
+            xhttp.send(request);
+
+        }
+    </script>
+    <form id ="uploadForm">
+        <label for="id" >Id:</label>
+        <input type="number" name ="id" id ='id_form'required>
+        <label for="title" >TytuĹ‚:</label>
+        <input type="text" name ="title" id='title_form' required>
+        <label for="desc" >Opis:</label>
+        <input type="text" name ="desc" id='desc_form' required>
+        <label for="author" >Autor:</label>
+        <input type="text" name ="author" id='auth_form' required>
+
+        <input type="submit" id="addFileInfoButton">
+    </form>
+    <form id="fileForm">
+        <input type="file" id="file_form">
+        <input type="submit" id="addFileButton">
+    </form>
+  </body>
+</html>
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+
+<> 2023-01-26T153809.415.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+<> 2023-01-26T153728.500.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+<> 2023-01-26T153716.500.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: application/json; name="data"
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+<> 2023-01-26T153701.400.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: application/json; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+<> 2023-01-26T153644.400.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+Content-Type: file
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: application/json; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+<> 2023-01-26T153630.400.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: application/json; name="data"
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+<> 2023-01-26T153527.400.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+<> 2023-01-26T153435.500.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{
+ "id" : 1,
+ "title" : "Tytuł sample",
+ "description" : "Decsription sample",
+ "author" : "Author sample"
+ }
+--boundary--
+
+<> 2023-01-26T153125.500.json
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/2
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="qwe.txt"
+
+< E:\Piotrek\Studia\Semestr 5\Architektury Usług Internetowych\lab6\AUI-Lab\file_test\qwe.txt
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	<script>
+
+        var backend_url = 'http://localhost:8080';
+
+        window.addEventListener('load', () => {
+            const form = document.getElementById('uploadForm');
+            form.addEventListener('submit', event => uploadData(event));
+
+            const form2 = document.getElementById('fileForm');
+            form2.addEventListener('submit', event => uploadFile(event));
+
+        });
+
+
+        function uploadData(event){
+            event.preventDefault();
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", backend_url  + '/api/files');
+
+
+
+            let request_object =
+            {
+                'id' : document.getElementById('id_form').value,
+                'title' : document.getElementById('title_form').value,
+                'description' : document.getElementById('desc_form').value,
+                'author' : document.getElementById('auth_form').value
+            };
+
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            xhttp.send(JSON.stringify(request_object));
+
+
+
+
+
+
+
+        }
+
+        function uploadFile(event){
+            event.preventDefault();
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("PUT",backend_url  + '/api/files/' + document.getElementById('id_form').value + '/file', true);
+
+            let request = new FormData();
+            request.append("file", document.getElementById('file_form').files[0]);
+            console.log("siema");
+            xhttp.send(request);
+
+        }
+    </script>
+    <form id ="uploadForm">
+        <label for="id" >Id:</label>
+        <input type="number" name ="id" id ='id_form'required>
+        <label for="title" >TytuĹ‚:</label>
+        <input type="text" name ="title" id='title_form' required>
+        <label for="desc" >Opis:</label>
+        <input type="text" name ="desc" id='desc_form' required>
+        <label for="author" >Autor:</label>
+        <input type="text" name ="author" id='auth_form' required>
+
+        <input type="submit" id="addFileInfoButton">
+    </form>
+    <form id="fileForm">
+        <input type="file" id="file_form">
+        <input type="submit" id="addFileButton">
+    </form>
+  </body>
+</html>
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T151446.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	<script>
+
+        var backend_url = 'http://localhost:8080';
+
+        window.addEventListener('load', () => {
+            const form = document.getElementById('uploadForm');
+            form.addEventListener('submit', event => uploadData(event));
+
+            const form2 = document.getElementById('fileForm');
+            form2.addEventListener('submit', event => uploadFile(event));
+
+        });
+
+
+        function uploadData(event){
+            event.preventDefault();
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", backend_url  + '/api/files');
+
+
+
+            let request_object =
+            {
+                'id' : document.getElementById('id_form').value,
+                'title' : document.getElementById('title_form').value,
+                'description' : document.getElementById('desc_form').value,
+                'author' : document.getElementById('auth_form').value
+            };
+
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            xhttp.send(JSON.stringify(request_object));
+
+
+
+
+
+
+
+        }
+
+        function uploadFile(event){
+            event.preventDefault();
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("PUT",backend_url  + '/api/files/' + document.getElementById('id_form').value + '/file', true);
+
+            let request = new FormData();
+            request.append("file", document.getElementById('file_form').files[0]);
+            console.log("siema");
+            xhttp.send(request);
+
+        }
+    </script>
+    <form id ="uploadForm">
+        <label for="id" >Id:</label>
+        <input type="number" name ="id" id ='id_form'required>
+        <label for="title" >TytuĹ‚:</label>
+        <input type="text" name ="title" id='title_form' required>
+        <label for="desc" >Opis:</label>
+        <input type="text" name ="desc" id='desc_form' required>
+        <label for="author" >Autor:</label>
+        <input type="text" name ="author" id='auth_form' required>
+
+        <input type="submit" id="addFileInfoButton">
+    </form>
+    <form id="fileForm">
+        <input type="file" id="file_form">
+        <input type="submit" id="addFileButton">
+    </form>
+  </body>
+</html>
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T151324.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T151239.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="s_file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T151100.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T151026.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T151005.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T150914.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T150827.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T150808.400.json
+
+###
+
+PUT http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T150756.405.json
+
+###
+
+PUT http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Disposition: form-data; name="data"
+Content-Type: application/json
+
+{ "foo" : "bar" }
+--boundary--
+
+<> 2023-01-26T150524.400.json
+
+###
+
+PUT http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Type: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Type: application/json; name="data"
+"{:
+'test': 'osiem'
+}:
+":
+
+
+--boundary--
+
+<> 2023-01-26T150309.400.json
+
+###
+
+PUT http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Type: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Type: application/json; name="data"
+{:
+"test": "osiem"
+}:
+
+
+--boundary--
+
+<> 2023-01-26T150246.400.json
+
+###
+
+POST http://localhost:8080/api/files/1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Type: form-data; name="file"
+
+siema z pliku spring
+--boundary
+Content-Type: application/json; name="data"
+{:
+"test": "osiem"
+}:
+
+
+--boundary--
+
+<> 2023-01-26T150225.405.json
+
+###
+
 PUT http://localhost:8080/api/files/3/file
 -----------------------------35236241653576449622212177429:
 Content-Disposition: form-data; name="file"; filename="testset.txt"
@@ -117,274 +1159,6 @@ Content-Type: application/json
   "description" : "Airline Transport Pilot (modified)",
   "pilotId" : 2
 }
-
-###
-
-PUT http://localhost:8080/api/licenses/3
-Content-Type: application/json
-
-{
-  "privilegeLevel" : "ATP",
-  "issueDate" : "2022-10-20",
-  "description" : "Airline Transport Pilot (modified)",
-  "pilotId" : 1
-}
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T164100.200.json
-
-###
-
-POST http://localhost:8080/api/licenses
-Content-Type: application/json
-
-{
-  "id" : 3,
-  "privilegeLevel" : "ATP",
-  "issueDate" : "2022-10-20",
-  "description" : "Airline Transport Pilot",
-  "pilotId" : 2
-}
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T164043.200.json
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T164017.200.json
-
-###
-
-PUT http://localhost:8080/api/pilots/45
-Content-Type: application/json
-
-{
-  "name": "Jan",
-  "surname": "Kowalski",
-  "dateOfBirth": "2001-03-03"
-}
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T164006.200.json
-
-###
-
-POST http://localhost:8080/api/pilots
-Content-Type: application/json
-
-{
-  "id": 45,
-  "name" : "Jan",
-  "surname" : "Nowak",
-  "dateOfBirth" : "1998-12-07"
-}
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T163942.200.json
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T163934.200.json
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T161731.200.json
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T161727.200.json
-
-###
-
-DELETE http://localhost:8080/api/pilots/1
-
-###
-
-GET http://localhost:8080/api/pilots/1/licenses
-
-<> 2022-10-21T152208.200.json
-
-###
-
-DELETE http://localhost:8080/api/pilots/1/licenses/34
-
-###
-
-GET http://localhost:8080/api/pilots/1/licenses
-
-<> 2022-10-21T152154.200.json
-
-###
-
-PUT http://localhost:8080/api/pilots/1/licenses/34
-Content-Type: application/json
-
-{
-  "privilegeLevel" : "commercial",
-  "issueDate" : "2022-10-20",
-  "description" : "A commercial license with more text"
-}
-
-###
-
-GET http://localhost:8080/api/pilots/1/licenses
-
-<> 2022-10-21T152140.200.json
-
-###
-
-PUT http://localhost:8080/api/pilots/1/licenses
-Content-Type: application/json
-
-{
-  "id": 34,
-  "privilegeLevel" : "commercial",
-  "issueDate" : "2022-10-20",
-  "description" : "A commercial license"
-}
-
-###
-
-GET http://localhost:8080/api/pilots/1/licenses/1
-
-<> 2022-10-21T152129.200.json
-
-###
-
-GET http://localhost:8080/api/pilots/1/licenses
-
-<> 2022-10-21T152120.200.json
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T152048.200.json
-
-###
-
-DELETE http://localhost:8080/api/licenses/3
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T152038.200.json
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T152028.200.json
-
-###
-
-POST http://localhost:8080/api/licenses
-Content-Type: application/json
-
-{
-  "id" : 3,
-  "privilegeLevel" : "ATP",
-  "issueDate" : "2022-10-20",
-  "description" : "Airline Transport Pilot",
-  "pilotId" : 2
-}
-
-###
-
-GET http://localhost:8080/api/licenses/1
-
-<> 2022-10-21T152021.200.json
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T152006.200.json
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T151944.200.json
-
-###
-
-POST http://localhost:8080/api/licenses
-Content-Type: application/json
-
-{
-  "id" : 3,
-  "privilegeLevel" : "ATP",
-  "issueDate" : "2022-10-20",
-  "description" : "Airline Transport Pilot",
-  "pilotId" : 2
-}
-
-###
-
-GET http://localhost:8080/api/licenses/1
-
-<> 2022-10-21T151932.200.json
-
-###
-
-GET http://localhost:8080/api/licenses
-
-<> 2022-10-21T151926.200.json
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T151915.200.json
-
-###
-
-DELETE http://localhost:8080/api/pilots/45
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T151833.200.json
-
-###
-
-PUT http://localhost:8080/api/pilots/45
-Content-Type: application/json
-
-{
-  "name": "Jan",
-  "surname": "Kowalski",
-  "dateOfBirth": "2001-03-03"
-}
-
-###
-
-GET http://localhost:8080/api/pilots
-
-<> 2022-10-21T151811.200.json
 
 ###
 

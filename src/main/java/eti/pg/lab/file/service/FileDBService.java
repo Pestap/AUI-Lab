@@ -24,34 +24,22 @@ public class FileDBService {
     }
 
     @Transactional
-    public FileDB save(FileDB fileDB){
-        FileDB fileDB_S= FileDB.builder()
-                .id(fileDB.getId())
-                .title(fileDB.getTitle())
-                .author(fileDB.getAuthor())
-                .description(fileDB.getDescription())
-                .build();
-
-        // save file to directory
-
-        return repository.save(fileDB_S);
+    public FileDB save(FileDB file){
+        /**
+         * save to file
+         */
+        try {
+            Path path = Paths.get("E:\\Piotrek\\Studia\\Semestr 5\\Architektury Usług Internetowych\\lab6\\AUI-Lab\\FILES");
+            File targetFile = new File(path + "\\" + file.getFilename());
+            OutputStream os = new FileOutputStream(targetFile);
+            os.write(file.getData());
+        }
+        catch (Exception ex){
+            throw new IllegalStateException(ex);
+        }
+        return repository.save(file);
     }
 
-    @Transactional
-    public void updateFile(int id, InputStream is){
-        repository.findById(id).ifPresent(file -> {
-            try {
-                file.setData(is.readAllBytes());
-                //save to directory
-                Path path = Paths.get("E:\\Piotrek\\Studia\\Semestr 5\\Architektury Usług Internetowych\\lab6\\AUI-Lab\\FILES");
-                File targetFile = new File(path +"\\"+file.getTitle() + ".txt");
-                OutputStream os = new FileOutputStream(targetFile);
-                os.write(file.getData());
-            } catch (IOException ex) {
-                throw new IllegalStateException(ex);
-            }
-        });
-    }
     @Transactional
     public Optional<FileDB> find(int id){
         return repository.findById(id);
